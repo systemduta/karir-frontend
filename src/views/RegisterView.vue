@@ -13,10 +13,15 @@
                      <div class="card shadow mb-3">
                         <div class="card-body">
                            <div class="pt-4 pb-2">
-                              <h5 class="card-title text-center pb-0 fs-4">Masuk ke akun anda</h5>
-                              <p class="text-center small">Masukkan email dan password untuk melanjutkan</p>
+                              <h5 class="card-title text-center pb-0 fs-4">Daftar akun baru</h5>
+                              <p class="text-center small">Masukkan informasi personal anda untuk membuat akun</p>
                            </div>
                            <form class="row g-3">
+                             <div class="col-12">
+                                 <label class="form-label">Nama</label>
+                                 <input type="text" name="name" class="form-control" required>
+                                 <div class="invalid-feedback">Please enter your name.</div>
+                              </div>
                               <div class="col-12">
                                  <label class="form-label">Email</label>
                                  <input type="email" name="email" class="form-control" required>
@@ -28,16 +33,15 @@
                                  <div class="invalid-feedback">Please enter your password!</div>
                               </div>
                               <div class="col-12">
-                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" value="1" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Ingat Saya</label>
-                                 </div>
+                                 <label class="form-label">Konfirmasi Password</label>
+                                 <input type="password" name="password_confirmation" class="form-control" required>
+                                 <div class="invalid-feedback">Please enter your password!</div>
                               </div>
                               <div class="col-12">
-                                 <button class="btn btn-primary w-100" type="submit">Masuk</button>
+                                 <button class="btn btn-primary w-100" type="submit">Daftar</button>
                               </div>
                               <div class="col-12">
-                                 <p class="small mb-0">Tidak punya akun? <a href="/register">Buat Sekarang!</a></p>
+                                 <p class="small mb-0">Sudah punya akun? <a href="/login">Masuk Sekarang!</a></p>
                               </div>
                            </form>
                         </div>
