@@ -1,18 +1,22 @@
+<script setup>
+import NavigationBar from "@/components/NavigationBar.vue";
+</script>
+
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <main>
+    <NavigationBar />
+    <h1 class="text-center">Halaman Beranda</h1>
+    <h4 class="text-center">Vue 3 with Bootstrap 5</h4>
+    <TodoContainer />
+  </main>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import TodoContainer from "../components/TodoContainer.vue";
 
 export default {
-  name: "HomeView",
   components: {
-    HelloWorld,
+    TodoContainer,
   },
 };
 </script>
