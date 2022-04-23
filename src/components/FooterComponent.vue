@@ -110,9 +110,9 @@
       </a>
     </div>
   </div>
-  <footer class="text-white" id="footer" style="background: #212121">
-    <div class="row g-4 p-3">
-      <div class="col-12 col-md-4 text-lg-start flex-fill">
+  <footer class="text-white" style="background: #212121">
+    <div class="row g-4 p-4" style="margin-right: 0 !important">
+      <div class="col-12 col-md-4">
         <img class="img-fluid mb-3" src="@/assets/logo.png" alt="EL logo" />
         <p>
           "Menjadi perusahaan yang disegani dalam berbagai bidang usaha dan

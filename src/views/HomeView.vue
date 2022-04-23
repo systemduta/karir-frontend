@@ -4,6 +4,12 @@ import FooterComponent from "@/components/FooterComponent.vue";
 </script>
 
 <style scoped>
+@media (min-width: 600px) {
+  #hero {
+    border-radius: 0;
+  }
+}
+
 #vector1 {
   height: 406px;
   width: 718px;
@@ -38,7 +44,8 @@ import FooterComponent from "@/components/FooterComponent.vue";
       <section class="pb-5" style="position: relative">
         <div
           class="bg-primary row justify-content-center p-5"
-          style="border-radius: 0 0 70px 200px"
+          style="border-radius: 0 0 70px 200px; margin-right: 0 !important"
+          id="hero"
         >
           <img src="@/assets/vectors/vector1.png" id="vector1" />
           <div class="col-12 col-md-6" style="z-index: 1">
@@ -57,10 +64,8 @@ import FooterComponent from "@/components/FooterComponent.vue";
               alt="hero"
             />
           </div>
-          <!-- Give height space -->
           <div class="w-full" style="height: 100px"></div>
         </div>
-        <!-- floating input -->
         <div class="row justify-content-center" id="filterContainer">
           <div
             class="shadow rounded-pill text-center p-4 w-75"
@@ -94,7 +99,6 @@ import FooterComponent from "@/components/FooterComponent.vue";
           </div>
         </div>
       </section>
-      <!-- TODO: Delete this -->
       <div class="w-full" style="height: 250px"></div>
     </main>
     <FooterComponent />
@@ -107,8 +111,9 @@ export default {
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         const width = entry.contentRect.width;
+        // console.log(width);
         const filter = document.getElementById("filter");
-        if (width < 751) {
+        if (width < 772) {
           filter.classList.remove("rounded-pill");
           filter.classList.add("rounded-3");
         } else {
