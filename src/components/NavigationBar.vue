@@ -76,9 +76,6 @@ export default {
 
     function hasScrolled() {
       const scrollTop = $(document).scrollTop();
-
-      console.log(`${scrollTop} > ${lastScrollTop}`);
-
       if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
       // This is necessary so you never see what is "behind" the navbar.
 

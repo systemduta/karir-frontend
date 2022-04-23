@@ -182,8 +182,11 @@
       <div class="col-12 col-md-4">
         <h5 class="fw-bold text-white">Contact Us</h5>
         <p>
-          62 821-2366-6647 info@maesagroup.co.id Jl. Urip Sumoharjo No.63 Kota
-          Madiun 63127 Jawa Timur - Indonesia
+          62 821-2366-6647 <br />
+          <a href="mailto:info@maesagroup.co.id">info@maesagroup.co.id</a><br />
+          Jl. Urip Sumoharjo No.63 <br />
+          Kota Madiun 63127 <br />
+          Jawa Timur - Indonesia
         </p>
       </div>
     </div>
