@@ -4,106 +4,145 @@
       class="d-flex gap-4 align-items-center"
       style="overflow-x: auto; height: 150px"
     >
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/bank-arthaya"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Bank-Arthaya.png"
-          class=""
           height="50px"
           alt="Bank Arthaya"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/cun-motor-group"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-CUN.png"
-          class=""
           height="50px"
           alt="CUN Motor"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/aum"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-AUM.png"
-          class=""
           height="50px"
           alt="AUM"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/prama-logistic"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Prama-Logistic.png"
-          class=""
           height="50px"
           alt="Prama Logistic"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/maesa-hotel"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Maesa-Hotel.png"
-          class=""
           height="50px"
           alt="Maesa Hotel"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/pabrik-es-pmp-group"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Pabrik-Es-PMP.png"
-          class=""
           height="50px"
           alt="PMP Ice"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/mixtra-inti-tekindo"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-MIT.png"
-          class=""
           height="50px"
           alt="MIT"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/pandu-distributor"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Pandu-Distributor.png"
-          class=""
           height="50px"
           alt="Pandu Distributor"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/hennessey-cuisine"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Hennessey.png"
-          class=""
           height="50px"
           alt="Hennessey"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/koperasi-sdm"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Koperasi-SDM.png"
-          class=""
           height="50px"
           alt="Koperasi SDM"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/werkst"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Werkst.png"
-          class=""
           height="50px"
           alt="Werkst"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/pabrik-es-tube"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Es-Kristal-PMP.png"
-          class=""
           height="50px"
           alt="PMP Es Kristal"
         />
       </a>
-      <a href="#" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://maesagroup.co.id/dua-tangan-indonesia"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           src="@/assets/images/companies/Logo-Dua-Tangan.png"
-          class=""
           height="50px"
           alt="Dua Tangan"
         />
@@ -172,13 +211,23 @@
         <h5 class="fw-bold text-white">Quicklinks</h5>
         <ul>
           <li>
-            <a href="#" class="text-white text-decoration-none">Situs Utama</a>
+            <a
+              href="https://maesagroup.co.id/"
+              class="text-white text-decoration-none"
+              >Situs Utama</a
+            >
           </li>
           <li>
-            <a href="#" class="text-white text-decoration-none">Peta Situs</a>
+            <a
+              href="https://maesagroup.co.id/sitemap/"
+              class="text-white text-decoration-none"
+              >Peta Situs</a
+            >
           </li>
           <li>
-            <a href="#" class="text-white text-decoration-none"
+            <a
+              href="https://maesagroup.co.id/maesa-foundation"
+              class="text-white text-decoration-none"
               >Maesa Foundation</a
             >
           </li>
