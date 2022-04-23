@@ -6,7 +6,7 @@
     >
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Bank-Arthaya.png"
+          src="@/assets/images/companies/Logo-Bank-Arthaya.png"
           class=""
           height="50px"
           alt="Bank Arthaya"
@@ -14,7 +14,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-CUN.png"
+          src="@/assets/images/companies/Logo-CUN.png"
           class=""
           height="50px"
           alt="CUN Motor"
@@ -22,7 +22,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-AUM.png"
+          src="@/assets/images/companies/Logo-AUM.png"
           class=""
           height="50px"
           alt="AUM"
@@ -30,7 +30,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Prama-Logistic.png"
+          src="@/assets/images/companies/Logo-Prama-Logistic.png"
           class=""
           height="50px"
           alt="Prama Logistic"
@@ -38,7 +38,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Maesa-Hotel.png"
+          src="@/assets/images/companies/Logo-Maesa-Hotel.png"
           class=""
           height="50px"
           alt="Maesa Hotel"
@@ -46,7 +46,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Pabrik-Es-PMP.png"
+          src="@/assets/images/companies/Logo-Pabrik-Es-PMP.png"
           class=""
           height="50px"
           alt="PMP Ice"
@@ -54,7 +54,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-MIT.png"
+          src="@/assets/images/companies/Logo-MIT.png"
           class=""
           height="50px"
           alt="MIT"
@@ -62,7 +62,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Pandu-Distributor.png"
+          src="@/assets/images/companies/Logo-Pandu-Distributor.png"
           class=""
           height="50px"
           alt="Pandu Distributor"
@@ -70,7 +70,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Hennessey.png"
+          src="@/assets/images/companies/Logo-Hennessey.png"
           class=""
           height="50px"
           alt="Hennessey"
@@ -78,7 +78,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Koperasi-SDM.png"
+          src="@/assets/images/companies/Logo-Koperasi-SDM.png"
           class=""
           height="50px"
           alt="Koperasi SDM"
@@ -86,7 +86,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Werkst.png"
+          src="@/assets/images/companies/Logo-Werkst.png"
           class=""
           height="50px"
           alt="Werkst"
@@ -94,7 +94,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Es-Kristal-PMP.png"
+          src="@/assets/images/companies/Logo-Es-Kristal-PMP.png"
           class=""
           height="50px"
           alt="PMP Es Kristal"
@@ -102,7 +102,7 @@
       </a>
       <a href="#" target="_blank" rel="noopener noreferrer">
         <img
-          src="@/assets/companies/Logo-Dua-Tangan.png"
+          src="@/assets/images/companies/Logo-Dua-Tangan.png"
           class=""
           height="50px"
           alt="Dua Tangan"
@@ -113,7 +113,12 @@
   <footer class="text-white" style="background: #212121">
     <div class="row g-4 p-4" style="margin-right: 0 !important">
       <div class="col-12 col-md-4">
-        <img class="img-fluid mb-3" src="@/assets/logo.png" alt="EL logo" />
+        <img
+          class="mb-3"
+          style="width: 300px; height: auto"
+          src="@/assets/logo.png"
+          alt="Maesa Logo"
+        />
         <p>
           "Menjadi perusahaan yang disegani dalam berbagai bidang usaha dan
           berdampak positif bagi pemegang saham, lingkungan sekitar dan bangsa"

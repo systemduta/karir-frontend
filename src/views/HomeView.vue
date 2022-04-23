@@ -4,7 +4,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
 </script>
 
 <style scoped>
-@media (min-width: 600px) {
+@media screen and (min-width: 600px) {
   #hero {
     border-radius: 0;
   }
@@ -47,7 +47,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
           style="border-radius: 0 0 70px 200px; margin-right: 0 !important"
           id="hero"
         >
-          <img src="@/assets/vectors/vector1.png" id="vector1" />
+          <img src="@/assets/images/vectors/vector1.png" id="vector1" />
           <div class="col-12 col-md-6" style="z-index: 1">
             <p class="fs-3 fw-bold lh-lg">
               Temukan Jalanmu untuk Berinovasi <br />
@@ -55,8 +55,8 @@ import FooterComponent from "@/components/FooterComponent.vue";
               Maesa Group
             </p>
           </div>
-          <img src="@/assets/vectors/vector2.png" id="vector2" />
-          <img src="@/assets/vectors/vector3.png" id="vector3" />
+          <img src="@/assets/images/vectors/vector2.png" id="vector2" />
+          <img src="@/assets/images/vectors/vector3.png" id="vector3" />
           <div class="col-12 col-md-6" style="z-index: 1">
             <img
               src="@/assets/images/hero.png"
@@ -111,7 +111,6 @@ export default {
     const observer = new ResizeObserver((entries) => {
       entries.forEach((entry) => {
         const width = entry.contentRect.width;
-        // console.log(width);
         const filter = document.getElementById("filter");
         if (width < 772) {
           filter.classList.remove("rounded-pill");

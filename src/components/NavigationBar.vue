@@ -1,13 +1,13 @@
 <template>
   <nav
     id="navbar"
-    class="navbar sticky-top navbar-expand-lg navbar-light bg-primary"
+    class="sticky-top navbar-expand-lg navbar-light bg-primary py-2"
     style="
       transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
     "
   >
-    <div class="container">
-      <RouterLink class="navbar-brand" to="/">
+    <div class="d-flex justify-content-center">
+      <RouterLink class="" to="/">
         <img
           src="@/assets/logo-white.png"
           alt="Maesa Group"
@@ -22,31 +22,6 @@
           id="logo-primary"
         />
       </RouterLink>
-      <button
-        class="navbar-toggler text-white"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon text-white"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="ms-auto navbar-nav">
-          <li class="nav-item">
-            <RouterLink class="nav-link text-white fs-5" to="/login"
-              >Masuk</RouterLink
-            >
-          </li>
-          <li class="nav-item">
-            <RouterLink class="nav-link text-white fs-5" to="/register"
-              >Daftar</RouterLink
-            >
-          </li>
-        </ul>
-      </div>
     </div>
   </nav>
 </template>
