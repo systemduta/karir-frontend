@@ -252,8 +252,10 @@
             All Right Reserved | PT. Maesa Cipta Corporindo. 2022
           </div>
           <div class="col-12 col-lg-6 text-center text-md-end">
-            Privacy Policy &emsp; Site
-            <span class="text-primary text-decoration-underline">Credit</span>
+            Privacy Policy &emsp;
+            <a href="https://storyset.com/data"
+              >Data illustrations by Storyset</a
+            >
           </div>
         </div>
       </div>

@@ -58,18 +58,12 @@ export default {
         // Scroll Down
         navbar.classList.remove("bg-primary");
         navbar.style.backgroundColor = "white";
-        document.querySelectorAll(".nav-link").forEach((element) => {
-          element.classList.remove("text-white");
-        });
         navbar.classList.add("shadow");
         document.getElementById("logo-primary").classList.remove("d-none");
         document.getElementById("logo-white").classList.add("d-none");
       } else {
         if (scrollTop == 0) {
           navbar.classList.add("bg-primary");
-          document.querySelectorAll(".nav-link").forEach((element) => {
-            element.classList.add("text-white");
-          });
           navbar.classList.remove("shadow");
           document.getElementById("logo-primary").classList.add("d-none");
           document.getElementById("logo-white").classList.remove("d-none");
