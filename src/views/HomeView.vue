@@ -62,7 +62,7 @@ import VacancyCard from "@/components/VacancyCard.vue";
           style="border-radius: 0 0 70px 200px; margin-right: 0 !important"
           id="hero"
         >
-          <img src="@/assets/images/vectors/vector1.png" id="vector1" />
+          <img src="@/assets/images/vectors/vector1.svg" id="vector1" />
           <div class="col-12 col-md-6" style="z-index: 1">
             <p class="fs-3 fw-bold lh-lg">
               Temukan Jalanmu untuk Berinovasi <br />
@@ -70,8 +70,8 @@ import VacancyCard from "@/components/VacancyCard.vue";
               Maesa Group
             </p>
           </div>
-          <img src="@/assets/images/vectors/vector2.png" id="vector2" />
-          <img src="@/assets/images/vectors/vector3.png" id="vector3" />
+          <img src="@/assets/images/vectors/vector2.svg" id="vector2" />
+          <img src="@/assets/images/vectors/vector3.svg" id="vector3" />
           <div class="col-12 col-md-6" style="z-index: 1">
             <img
               src="@/assets/images/hero.png"
