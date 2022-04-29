@@ -19,7 +19,6 @@ import VacancyCard from "@/components/VacancyCard.vue";
 #vector1 {
   height: 406px;
   width: 718px;
-  z-index: 0;
   position: absolute;
   left: 2%;
 }
@@ -27,7 +26,6 @@ import VacancyCard from "@/components/VacancyCard.vue";
 #vector2 {
   height: 150px;
   width: 150px;
-  z-index: 0;
   position: absolute;
   top: 25%;
   left: 48%;
@@ -36,7 +34,6 @@ import VacancyCard from "@/components/VacancyCard.vue";
 #vector3 {
   height: 432px;
   width: 315px;
-  z-index: 0;
   position: absolute;
   top: 5%;
   right: 15%;
@@ -62,17 +59,29 @@ import VacancyCard from "@/components/VacancyCard.vue";
           style="border-radius: 0 0 70px 200px; margin-right: 0 !important"
           id="hero"
         >
-          <img src="@/assets/images/vectors/vector1.svg" id="vector1" />
-          <div class="col-12 col-md-6" style="z-index: 1">
+          <img
+            src="@/assets/images/vectors/vector1.svg"
+            class="z-index-0"
+            id="vector1"
+          />
+          <div class="col-12 col-md-6 z-index-1">
             <p class="fs-3 fw-bold lh-lg">
               Temukan Jalanmu untuk Berinovasi <br />
               dan Mewujudkan Mimpi Bersama <br />
               Maesa Group
             </p>
           </div>
-          <img src="@/assets/images/vectors/vector2.svg" id="vector2" />
-          <img src="@/assets/images/vectors/vector3.svg" id="vector3" />
-          <div class="col-12 col-md-6" style="z-index: 1">
+          <img
+            src="@/assets/images/vectors/dotted-kite.svg"
+            class="z-index-0"
+            id="vector2"
+          />
+          <img
+            src="@/assets/images/vectors/vector2.svg"
+            class="z-index-0"
+            id="vector3"
+          />
+          <div class="col-12 col-md-6 z-index-1">
             <img
               src="@/assets/images/hero.png"
               class="img-fluid rounded-2"

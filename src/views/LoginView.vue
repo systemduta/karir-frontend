@@ -1,40 +1,123 @@
+<style scoped>
+@media screen and (max-width: 600px) {
+  #bubles {
+    width: 250px;
+  }
+  #vector1,
+  #vector3,
+  #vector5 {
+    display: none;
+  }
+}
+
+#vector1 {
+  position: absolute;
+  top: 25%;
+  left: 2%;
+}
+
+#vector2 {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  bottom: 15%;
+  left: 23%;
+}
+
+#vector3 {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+}
+
+#vector4 {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  bottom: 30%;
+  right: 12%;
+}
+
+#vector5 {
+  position: absolute;
+  bottom: 1px;
+  right: 1px;
+}
+</style>
+
 <template>
-  <main style="background: #f6f9ff">
+  <main class="bg-primary">
     <div class="container">
+      <img
+        src="@/assets/images/vectors/vector3.svg"
+        id="vector1"
+        class="z-index-0"
+        alt=""
+      />
+      <img
+        src="@/assets/images/vectors/dotted-kite.svg"
+        id="vector2"
+        class="z-index-0"
+        alt=""
+      />
+      <img
+        src="@/assets/images/vectors/vector4.svg"
+        id="vector3"
+        class="z-index-0"
+        alt=""
+      />
+      <img
+        src="@/assets/images/vectors/dotted-kite.svg"
+        id="vector4"
+        class="z-index-0"
+        alt=""
+      />
+      <img
+        src="@/assets/images/vectors/vector5.svg"
+        id="vector5"
+        class="z-index-0"
+        alt=""
+      />
       <section
-        class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
+        class="min-vh-100 d-flex flex-column align-items-center justify-content-center py-4"
       >
         <div class="container">
           <div class="row justify-content-center">
             <div
-              class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center"
+              class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center z-index-1"
             >
-              <div class="d-flex justify-content-center py-4">
-                <div class="logo d-flex align-items-center w-auto">
-                  <img
-                    src="@/assets/logo.png"
-                    class="img-fluid"
-                    alt="Maesa Group Karir"
-                  />
-                </div>
-              </div>
-              <div class="card shadow mb-3">
+              <div
+                class="card shadow px-5"
+                style="
+                  background-color: #f5f5f5 !important;
+                  border-radius: 40px;
+                "
+              >
                 <div class="card-body">
+                  <div class="d-flex justify-content-center py-4">
+                    <div class="d-flex align-items-center">
+                      <a href="/">
+                        <img
+                          src="@/assets/logo.png"
+                          class="mb-5"
+                          width="191px"
+                          alt="Maesa Group Karir"
+                        />
+                      </a>
+                    </div>
+                  </div>
                   <div class="pt-4 pb-2">
-                    <h5 class="card-title text-center pb-0 fs-4">
-                      Masuk ke akun anda
-                    </h5>
-                    <p class="text-center small">
-                      Masukkan email dan password untuk melanjutkan
+                    <p class="text-center" style="color: #5c5c5c">
+                      Sign in to your account to continue
                     </p>
                   </div>
                   <form class="row g-3">
                     <div class="col-12">
-                      <label class="form-label">Email</label>
                       <input
                         type="email"
                         name="email"
-                        class="form-control"
+                        placeholder="Email"
+                        class="form-control rounded-pill shadow py-2"
                         required
                       />
                       <div class="invalid-feedback">
@@ -42,11 +125,11 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <label class="form-label">Password</label>
                       <input
                         type="password"
                         name="password"
-                        class="form-control"
+                        placeholder="Password"
+                        class="form-control rounded-pill shadow py-2"
                         required
                       />
                       <div class="invalid-feedback">
@@ -62,22 +145,30 @@
                           value="1"
                           id="rememberMe"
                         />
-                        <label class="form-check-label" for="rememberMe"
-                          >Ingat Saya</label
+                        <label
+                          class="form-check-label"
+                          style="color: #5c5c5c"
+                          for="rememberMe"
+                          >Remember me</label
                         >
                       </div>
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary w-100" type="submit">
-                        Masuk
+                      <button
+                        class="btn bg-primary rounded-pill w-100 py-3"
+                        type="submit"
+                      >
+                        Sign In
                       </button>
                     </div>
-                    <div class="col-12">
-                      <p class="small mb-0">
-                        Tidak punya akun? <a href="/register">Buat Sekarang!</a>
-                      </p>
-                    </div>
                   </form>
+                  <div class="col-12">
+                    <img
+                      id="bubles"
+                      src="@/assets/images/vectors/bubles.svg"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
