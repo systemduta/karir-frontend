@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import LoginView from "../views/LoginView.vue";
 import ApplyView from "../views/ApplyView.vue";
+import LoginView from "../views/LoginView.vue";
+import DashboardView from "../views/Dashboard/DashboardView.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: "/vacancy/{id}",
+    name: "vacancy",
+    // component: VacancyView,
   },
   {
     path: "/apply",
@@ -18,6 +24,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: LoginView,
+  },
+  {
+    path: "/dashboard",
+    name: "dashboard",
+    component: DashboardView,
   },
 ];
 
