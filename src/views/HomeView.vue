@@ -7,13 +7,17 @@ import VacancyCard from "@/components/VacancyCard.vue";
 
 <style scoped>
 @media screen and (max-width: 600px) {
-  #hero {
-    border-radius: 0;
+  #vector1,
+  #vector2,
+  #vector3 {
+    display: none;
   }
+}
 
-  #vector1 {
-    width: 400px;
-  }
+#hero {
+  background-image: url("@/assets/images/vectors/bg-hero.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #vector1 {
@@ -53,10 +57,10 @@ import VacancyCard from "@/components/VacancyCard.vue";
   <main>
     <NavigationBar />
     <main class="mb-5">
-      <section class="pb-5" style="position: relative">
+      <section class="" style="position: relative">
         <div
-          class="bg-primary row justify-content-center p-5"
-          style="border-radius: 0 0 70px 200px; margin-right: 0 !important"
+          class="row w-full justify-content-center p-5"
+          style="margin-right: 0 !important"
           id="hero"
         >
           <img
@@ -65,7 +69,7 @@ import VacancyCard from "@/components/VacancyCard.vue";
             id="vector1"
           />
           <div class="col-12 col-md-6 z-index-1">
-            <p class="fs-3 fw-bold lh-lg">
+            <p class="fs-3 fw-bold lh-lg text-white">
               Temukan Jalanmu untuk Berinovasi <br />
               dan Mewujudkan Mimpi Bersama <br />
               Maesa Group
@@ -88,7 +92,7 @@ import VacancyCard from "@/components/VacancyCard.vue";
               alt="hero"
             />
           </div>
-          <div class="w-full" style="height: 100px"></div>
+          <div class="w-full" style="height: 200px"></div>
         </div>
         <FilterComponent />
       </section>
