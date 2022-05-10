@@ -1,7 +1,7 @@
 <template>
   <div class="bg-primary py-3">
     <div
-      class="d-flex gap-4 align-items-center"
+      class="d-flex gap-4 align-items-center justify-content-center"
       style="overflow-x: auto; height: 150px"
     >
       <a
