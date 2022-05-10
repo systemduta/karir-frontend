@@ -150,7 +150,10 @@
     </div>
   </div>
   <footer class="text-white" style="background: #212121">
-    <div class="row g-4 p-4" style="margin-right: 0 !important">
+    <div
+      class="row g-4 p-4 justify-content-center"
+      style="margin-right: 0 !important"
+    >
       <div class="col-12 col-md-4">
         <img
           class="mb-3"
@@ -207,7 +210,7 @@
           ></a>
         </div>
       </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-3">
         <h5 class="fw-bold text-white">Quicklinks</h5>
         <ul>
           <li>
@@ -233,7 +236,7 @@
           </li>
         </ul>
       </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-3">
         <h5 class="fw-bold text-white">Contact Us</h5>
         <p>
           62 821-2366-6647 <br />
