@@ -107,12 +107,31 @@ import VacancyCard from "@/components/VacancyCard.vue";
       <div class="m-5 d-flex flex-column gap-5">
         <div class="row g-4">
           <div class="col-12 col-md-6">
-            <div class="card shadow border-radius-30px p-3">
-              <img
-                src="https://maesagroup.co.id/wp-content/uploads/2022/03/8-Frontend-Developer-1024x1024.png"
-                class="border-radius-30px"
-                alt="Job Position"
-              />
+            <div class="d-flex flex-column gap-3">
+              <div class="card shadow border-radius-30px p-3">
+                <p class="text-primary fs-4">Job Overview</p>
+                <hr />
+                <div>
+                  <ul>
+                    <li>Lorem Ipsum</li>
+                    <li>Lorem Ipsum</li>
+                    <li>Lorem Ipsum</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card shadow border-radius-30px p-3">
+                <p class="text-primary fs-4">Kualifikasi</p>
+                <hr />
+                <div>
+                  <div>
+                    <ul>
+                      <li>Lorem Ipsum</li>
+                      <li>Lorem Ipsum</li>
+                      <li>Lorem Ipsum</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div class="col-12 col-md-6">

@@ -14,7 +14,9 @@
       />
       <div class="card-body bg-primary">
         <h5 class="card-title">
-          <a class="text-decoration-none text-white fw-bolder">Programmer</a>
+          <a class="text-decoration-none text-white fw-bolder" href="#"
+            >Programmer</a
+          >
         </h5>
       </div>
     </div>
