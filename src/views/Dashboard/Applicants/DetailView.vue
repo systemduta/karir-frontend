@@ -153,6 +153,21 @@
                     </a>
                   </div>
                 </div>
+                <div class="p-3">
+                  <form>
+                    <div class="mb-3">
+                      <label class="form-label">Status</label>
+                      <select
+                        name="status"
+                        class="form-select rounded-pill py-2 bg-grey input-border"
+                      >
+                        <option value="process">Process</option>
+                        <option value="decline">Decline</option>
+                        <option value="approve">Approve</option>
+                      </select>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
