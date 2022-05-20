@@ -9,6 +9,7 @@ import ForgotPasswordView from "../views/Auth/ForgotPasswordView.vue";
 import ResetPasswordView from "../views/Auth/ResetPasswordView.vue";
 
 import DashboardView from "../views/Dashboard/DashboardView.vue";
+import ChangePasswordView from "../views/Dashboard/ChangePasswordView.vue";
 
 import DetailView from "../views/Dashboard/Applicants/DetailView.vue";
 
@@ -50,6 +51,11 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: DashboardView,
+  },
+  {
+    path: "/dashboard/change-password",
+    name: "password.change",
+    component: ChangePasswordView,
   },
   {
     path: "/dashboard/applicants/detail",

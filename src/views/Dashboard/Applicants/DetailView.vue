@@ -1,5 +1,5 @@
 <script setup>
-// import Header from "@/components/Dashboard/HeaderComponent.vue";
+import Header from "@/components/Dashboard/HeaderComponent.vue";
 // import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 </script>
 
