@@ -33,9 +33,9 @@
     class="d-flex flex-column justify-content-between sidebar accordion p-3 border"
   >
     <div>
-      <a
+      <RouterLink
         class="d-flex align-items-center justify-content-center"
-        href="/dashboard"
+        to="/dashboard"
       >
         <div class="py-3">
           <img
@@ -52,31 +52,31 @@
             id="logo-mini"
           />
         </div>
-      </a>
+      </RouterLink>
       <hr />
     </div>
     <div class="d-flex flex-column">
-      <a class="nav-link" href="/dashboard">
+      <RouterLink class="nav-link" to="/dashboard">
         <i class="bi bi-speedometer"></i>&emsp;
-        <span class="nav-text">Dashboard</span></a
+        <span class="nav-text">Dashboard</span></RouterLink
       >
-      <a class="nav-link" href="/dashboard/applicants">
+      <RouterLink class="nav-link" to="/dashboard/applicants">
         <i class="bi bi-people"></i>&emsp;
-        <span class="nav-text">Applicant</span></a
+        <span class="nav-text">Applicant</span></RouterLink
       >
-      <a class="nav-link" href="/dashboard/jobs">
+      <RouterLink class="nav-link" to="/dashboard/jobs">
         <i class="bi bi-briefcase"></i>&emsp;
-        <span class="nav-text">Job Post</span></a
+        <span class="nav-text">Job Post</span></RouterLink
       >
-      <a class="nav-link" href="/dashboard/change-password">
+      <RouterLink class="nav-link" to="password.change">
         <i class="bi bi-gear"></i>&emsp;
-        <span class="nav-text">Setting</span></a
+        <span class="nav-text">Setting</span></RouterLink
       >
     </div>
     <div>
-      <a class="nav-link" href="/logout">
+      <RouterLink class="nav-link" to="/logout">
         <i class="bi bi-box-arrow-right"></i> &emsp;
-        <span class="nav-text">Logout</span></a
+        <span class="nav-text">Logout</span></RouterLink
       >
       <div class="text-center">
         <button

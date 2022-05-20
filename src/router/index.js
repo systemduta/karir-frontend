@@ -11,66 +11,55 @@ import ResetPasswordView from "../views/Auth/ResetPasswordView.vue";
 import DashboardView from "../views/Dashboard/DashboardView.vue";
 import ChangePasswordView from "../views/Dashboard/ChangePasswordView.vue";
 
-import DetailView from "../views/Dashboard/Applicants/DetailView.vue";
+import ApplicantDetailView from "../views/Dashboard/Applicants/DetailView.vue";
 
-import CreateView from "../views/Dashboard/Jobs/CreateView.vue";
-import EditView from "../views/Dashboard/Jobs/EditView.vue";
+import JobCreateView from "../views/Dashboard/Jobs/CreateView.vue";
+import JobEditView from "../views/Dashboard/Jobs/EditView.vue";
 
 const routes = [
   {
     path: "/",
-    name: "home",
     component: HomeView,
   },
   {
     path: "/vacancy",
-    name: "vacancy",
     component: VacancyView,
   },
   {
     path: "/apply",
-    name: "apply",
     component: ApplyView,
   },
   {
     path: "/login",
-    name: "login",
     component: LoginView,
   },
   {
     path: "/forgot-password",
-    name: "password.forgot",
     component: ForgotPasswordView,
   },
   {
     path: "/reset-password",
-    name: "password.reset",
     component: ResetPasswordView,
   },
   {
     path: "/dashboard",
-    name: "dashboard",
     component: DashboardView,
   },
   {
     path: "/dashboard/change-password",
-    name: "password.change",
     component: ChangePasswordView,
   },
   {
     path: "/dashboard/applicants/detail",
-    name: "applicants.detail",
-    component: DetailView,
+    component: ApplicantDetailView,
   },
   {
     path: "/dashboard/jobs/create",
-    name: "jobs.create",
-    component: CreateView,
+    component: JobCreateView,
   },
   {
     path: "/dashboard/jobs/edit",
-    name: "jobs.edit",
-    component: EditView,
+    component: JobEditView,
   },
 ];
 
