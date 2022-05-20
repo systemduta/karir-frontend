@@ -14,7 +14,7 @@
 <template>
   <div class="bg-gray p-5">
     <div class="container">
-      <p class="fs-2 mb-3">Applicant Data</p>
+      <Header title="Applicant Data" />
       <div class="card" style="border-radius: 20px">
         <div id="ds-cover">
           <div class="p-4">

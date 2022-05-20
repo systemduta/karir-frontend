@@ -1,5 +1,5 @@
 <script setup>
-// import Header from "@/components/Dashboard/HeaderComponent.vue";
+import Header from "@/components/Dashboard/HeaderComponent.vue";
 // import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 </script>
 
@@ -14,7 +14,7 @@
 <template>
   <div class="bg-gray p-5">
     <div class="container">
-      <p class="fs-2 mb-3">Edit Job</p>
+      <Header title="Edit Job" />
       <div class="card" style="border-radius: 20px">
         <div id="ds-cover">
           <div style="height: 140px"></div>
