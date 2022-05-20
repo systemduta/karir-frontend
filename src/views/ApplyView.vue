@@ -44,18 +44,6 @@ import FooterComponent from "@/components/FooterComponent.vue";
   top: 5%;
   right: 15%;
 }
-
-.border-radius-30px {
-  border-radius: 30px;
-}
-
-.bg-grey {
-  background-color: #f5f5f5;
-}
-
-.input-border {
-  border: 1px solid #979797;
-}
 </style>
 
 <template>
@@ -106,7 +94,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
       <div class="m-5">
         <div class="row g-4">
           <div class="col-12 col-md-6">
-            <div class="card shadow border-radius-30px p-3">
+            <div class="card shadow rounded-30px p-3">
               <p class="text-primary fs-4">Data Diri</p>
               <hr />
               <div class="mb-3">
@@ -195,7 +183,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
           </div>
           <div class="col-12 col-md-6">
             <div class="d-flex flex-column gap-3">
-              <div class="card shadow border-radius-30px p-3">
+              <div class="card shadow rounded-30px p-3">
                 <p class="text-primary fs-4">Riwayat Pendidikan</p>
                 <hr />
                 <div class="mb-3">
@@ -227,7 +215,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   />
                 </div>
               </div>
-              <div class="card shadow border-radius-30px p-3">
+              <div class="card shadow rounded-30px p-3">
                 <p class="text-primary fs-4">Upload File</p>
                 <hr />
                 <div class="mb-3">
