@@ -108,61 +108,32 @@
                   </div>
                   <div class="pt-4 pb-2">
                     <p class="text-center" style="color: #5c5c5c">
-                      Sign in to your account to continue
+                      Reset password form
                     </p>
                   </div>
                   <form class="row g-3">
                     <div class="col-12">
                       <input
-                        type="email"
-                        name="email"
-                        placeholder="Email"
+                        type="password"
+                        name="password"
+                        placeholder="New Password"
                         class="form-control rounded-pill shadow py-2"
                         required
                       />
                       <div class="invalid-feedback">
-                        Please enter your email.
+                        Please enter your new password!
                       </div>
                     </div>
                     <div class="col-12">
                       <input
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="Re-enter New Password"
                         class="form-control rounded-pill shadow py-2"
                         required
                       />
                       <div class="invalid-feedback">
-                        Please enter your password!
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="remember"
-                          value="1"
-                          id="rememberMe"
-                        />
-                        <label
-                          class="form-check-label"
-                          style="color: #5c5c5c"
-                          for="rememberMe"
-                          >Remember me</label
-                        >
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="float-end">
-                        <p style="color: #5c5c5c">
-                          Forgot Password?
-                          <span
-                            ><a href="/forgot-password" class="text-primary"
-                              >Click Here</a
-                            ></span
-                          >
-                        </p>
+                        Re-enter your password!
                       </div>
                     </div>
                     <div class="col-12">
@@ -170,7 +141,7 @@
                         class="btn bg-primary rounded-pill w-100 py-3"
                         type="submit"
                       >
-                        Sign In
+                        Proceed
                       </button>
                     </div>
                   </form>
