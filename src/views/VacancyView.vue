@@ -2,6 +2,7 @@
 import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import VacancyCard from "@/components/VacancyCard.vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
 </script>
 
 <style scoped>
@@ -75,8 +76,8 @@ import VacancyCard from "@/components/VacancyCard.vue";
             id="vector1"
           />
           <div class="col-12 col-md-6 z-index-1 p-5">
-            <p class="fs-1 fw-bold lh-lg text-white">Front End Developer</p>
-            <p class="fs-5 lh-lg text-white">Internship</p>
+            <p class="fs-1 fw-bold lh-lg text-white">{{ vacancy.name }}</p>
+            <p class="fs-5 lh-lg text-white">{{ vacancy.type }}</p>
             <div class="d-flex gap-3 hero-buttons">
               <RouterLink
                 to="/apply"
@@ -113,11 +114,7 @@ import VacancyCard from "@/components/VacancyCard.vue";
                 <p class="text-primary fs-4">Job Overview</p>
                 <hr />
                 <div>
-                  <ul>
-                    <li>Lorem Ipsum</li>
-                    <li>Lorem Ipsum</li>
-                    <li>Lorem Ipsum</li>
-                  </ul>
+                  {{ vacancy.jobdesc }}
                 </div>
               </div>
               <div class="card shadow border-radius-30px p-3">
@@ -125,11 +122,7 @@ import VacancyCard from "@/components/VacancyCard.vue";
                 <hr />
                 <div>
                   <div>
-                    <ul>
-                      <li>Lorem Ipsum</li>
-                      <li>Lorem Ipsum</li>
-                      <li>Lorem Ipsum</li>
-                    </ul>
+                    {{ vacancy.qualification }}
                   </div>
                 </div>
               </div>
@@ -138,14 +131,14 @@ import VacancyCard from "@/components/VacancyCard.vue";
           <div class="col-12 col-md-6">
             <div class="d-flex flex-column gap-3">
               <div class="card shadow border-radius-30px p-3">
-                <p class="text-primary fs-4">Tanggal Pendaftaran</p>
+                <p class="text-primary fs-4">Tenggat Pendaftaran</p>
                 <hr />
-                <p>01 Januari 2022 - 31 Januari 2022</p>
+                <p>{{ vacancy.date }}</p>
               </div>
               <div class="card shadow border-radius-30px p-3">
                 <p class="text-primary fs-4">Penempatan</p>
                 <hr />
-                <p>Online</p>
+                <p>{{ vacancy.address }}</p>
               </div>
             </div>
           </div>
@@ -153,10 +146,20 @@ import VacancyCard from "@/components/VacancyCard.vue";
         <div>
           <p class="text-center text-primary fs-3">Karir Lainnya</p>
           <div class="row g-3 justify-content-center">
-            <VacancyCard />
-            <VacancyCard />
-            <VacancyCard />
-            <VacancyCard />
+            <div v-if="loading" class="d-flex justify-content-center">
+              <LoadingComponent />
+            </div>
+            <div v-if="error" class="text-center">
+              <p class="fs-4">Upss, something went wrong</p>
+            </div>
+            <VacancyCard
+              v-for="vacancy in limitedLatestVacancies"
+              :key="vacancy.id"
+              :id="vacancy.id"
+              :name="vacancy.name"
+              :image="vacancy.image"
+              :type="vacancy.type"
+            />
           </div>
         </div>
       </div>
@@ -166,7 +169,55 @@ import VacancyCard from "@/components/VacancyCard.vue";
 </template>
 
 <script>
+import { ref } from "vue";
+import axios from "../plugins/axios";
+
 export default {
-  mounted: function () {},
+  data() {
+    return {
+      vacancy: ref({}),
+      latestVacancies: ref([]),
+      loading: ref(true),
+      error: ref(false),
+    };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.fetchDetailVacancy();
+        this.fetchLatestVacancy();
+      },
+
+      { immediate: true }
+    );
+  },
+  computed: {
+    limitedLatestVacancies() {
+      return this.latestVacancies.slice(0, 3);
+    },
+  },
+  methods: {
+    async fetchDetailVacancy() {
+      try {
+        const { data } = await axios.get(
+          `careers-detail/${this.$route.params.id}`
+        );
+        this.vacancy = data.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async fetchLatestVacancy() {
+      try {
+        const { data } = await axios.get(`careers`);
+        this.loading = false;
+        this.latestVacancies = data.data;
+      } catch (error) {
+        this.loading = false;
+        this.error = true;
+      }
+    },
+  },
 };
 </script>

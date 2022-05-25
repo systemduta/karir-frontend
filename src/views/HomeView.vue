@@ -98,10 +98,15 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   name="search"
                   placeholder="Job title or keyword"
                   class="form-control rounded-pill"
+                  v-model="form.query"
                 />
               </div>
               <div class="col-12 col-md-5">
-                <select name="category" class="form-select rounded-pill">
+                <select
+                  name="type"
+                  class="form-select rounded-pill"
+                  v-model="form.type"
+                >
                   <option value="">Filter</option>
                   <option value="Fulltime">Fulltime</option>
                   <option value="Intern">Intern</option>
@@ -160,6 +165,10 @@ export default {
       vacancies: ref([]),
       loading: ref(true),
       error: ref(false),
+      form: {
+        query: "",
+        type: "",
+      },
     };
   },
   methods: {
@@ -179,17 +188,20 @@ export default {
       });
       observer.observe(document.getElementById("filterContainer"));
     },
+    async fetchVacanciesData() {
+      try {
+        const { data } = await axios.get("careers");
+        this.loading = false;
+        this.vacancies = data.data;
+      } catch (error) {
+        this.loading = false;
+        this.error = true;
+      }
+    },
   },
-  mounted: async function () {
+  mounted() {
     this.observeFilterComponent();
-    try {
-      const { data } = await axios.get("careers");
-      this.loading = false;
-      this.vacancies = data.data;
-    } catch (error) {
-      this.loading = false;
-      this.error = true;
-    }
+    this.fetchVacanciesData();
   },
 };
 </script>

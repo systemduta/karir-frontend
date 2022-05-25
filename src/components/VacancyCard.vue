@@ -15,7 +15,7 @@
       <div class="card-body bg-primary">
         <h5 class="card-title">
           <RouterLink
-            to="/vacancies/1"
+            :to="`/vacancies/${id}`"
             class="text-decoration-none text-white fw-bolder"
             >{{ name }}</RouterLink
           >
