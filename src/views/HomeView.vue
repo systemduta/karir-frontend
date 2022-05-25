@@ -1,8 +1,8 @@
 <script setup>
 import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
-import FilterComponent from "@/components/FilterComponent.vue";
 import VacancyCard from "@/components/VacancyCard.vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
 </script>
 
 <style scoped>
@@ -41,15 +41,6 @@ import VacancyCard from "@/components/VacancyCard.vue";
   position: absolute;
   top: 5%;
   right: 15%;
-}
-
-.nav-tabs .nav-link:hover {
-  border: none;
-}
-
-.nav-tabs .nav-link.active {
-  border: none;
-  border-bottom: 3px solid #f3b520;
 }
 </style>
 
@@ -94,74 +85,59 @@ import VacancyCard from "@/components/VacancyCard.vue";
           </div>
           <div class="w-full" style="height: 200px"></div>
         </div>
-        <FilterComponent />
+        <div class="row justify-content-center" id="filterContainer">
+          <div
+            class="shadow rounded-pill text-center p-4 w-75"
+            style="background-color: #e1e1e1; position: absolute; bottom: 0"
+            id="filter"
+          >
+            <form class="row g-3 justify-content-center align-items-center">
+              <div class="col-12 col-md-5">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="Job title or keyword"
+                  class="form-control rounded-pill"
+                />
+              </div>
+              <div class="col-12 col-md-5">
+                <select name="category" class="form-select rounded-pill">
+                  <option value="">Filter</option>
+                  <option value="Fulltime">Fulltime</option>
+                  <option value="Intern">Intern</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-2">
+                <button
+                  type="submit"
+                  class="rounded-pill text-white w-100"
+                  style="background-color: #434343"
+                >
+                  Search
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
       </section>
       <div class="m-5">
-        <div class="mb-5 text-center text-primary">
-          <h1>Career</h1>
-          <ul class="nav nav-tabs border-0 justify-content-center">
-            <li class="nav-item">
-              <button
-                class="nav-link text-black active"
-                data-bs-toggle="tab"
-                data-bs-target="#all-vacancy"
-              >
-                All
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link text-black"
-                data-bs-toggle="tab"
-                data-bs-target="#intern-vacancy"
-              >
-                Intern
-              </button>
-            </li>
-            <li class="nav-item">
-              <button
-                class="nav-link text-black"
-                data-bs-toggle="tab"
-                data-bs-target="#fulltime-vacancy"
-              >
-                Full Time
-              </button>
-            </li>
-          </ul>
+        <div class="row g-3 justify-content-center">
+          <div v-if="loading" class="d-flex justify-content-center">
+            <LoadingComponent />
+          </div>
+          <div v-if="error" class="text-center">
+            <p class="fs-4">Upss, something went wrong</p>
+          </div>
+          <VacancyCard
+            v-for="vacancy in vacancies"
+            :key="vacancy.id"
+            :id="vacancy.id"
+            :name="vacancy.name"
+            :image="vacancy.image"
+            :type="vacancy.type"
+          />
         </div>
-        <div class="tab-content pt-2">
-          <div class="tab-pane fade show active" id="all-vacancy">
-            <div class="row g-3 justify-content-center">
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-              <VacancyCard />
-            </div>
-          </div>
-          <div class="tab-pane fade" id="intern-vacancy">
-            <div class="mx-auto w-50">
-              <img
-                src="@/assets/images/ilustrations/no-data.svg"
-                class="img-fluid"
-                alt="No data available"
-              />
-            </div>
-          </div>
-          <div class="tab-pane fade" id="fulltime-vacancy">
-            <div class="mx-auto w-50">
-              <img
-                src="@/assets/images/ilustrations/no-data.svg"
-                class="img-fluid"
-                alt="No data available"
-              />
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-5">
+        <div v-if="vacancies.length > 4" class="text-center mt-5">
           <a
             href="#"
             class="bg-primary bg-gradient shadow rounded-pill p-4 text-decoration-none"
@@ -175,7 +151,45 @@ import VacancyCard from "@/components/VacancyCard.vue";
 </template>
 
 <script>
+import { ref } from "vue";
+import axios from "../plugins/axios";
+
 export default {
-  mounted: function () {},
+  data() {
+    return {
+      vacancies: ref([]),
+      loading: ref(true),
+      error: ref(false),
+    };
+  },
+  methods: {
+    observeFilterComponent() {
+      const observer = new ResizeObserver((entries) => {
+        entries.forEach((entry) => {
+          const width = entry.contentRect.width;
+          const filter = document.getElementById("filter");
+          if (width < 772) {
+            filter.classList.remove("rounded-pill");
+            filter.classList.add("rounded-3");
+          } else {
+            filter.classList.add("rounded-pill");
+            filter.classList.remove("rounded-3");
+          }
+        });
+      });
+      observer.observe(document.getElementById("filterContainer"));
+    },
+  },
+  mounted: async function () {
+    this.observeFilterComponent();
+    try {
+      const { data } = await axios.get("careers");
+      this.loading = false;
+      this.vacancies = data.data;
+    } catch (error) {
+      this.loading = false;
+      this.error = true;
+    }
+  },
 };
 </script>

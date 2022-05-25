@@ -22,7 +22,7 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/vacancy",
+    path: "/vacancies/:id",
     component: VacancyView,
   },
   {
