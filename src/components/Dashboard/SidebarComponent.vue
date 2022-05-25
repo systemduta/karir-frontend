@@ -5,10 +5,6 @@
   position: relative;
 }
 
-.nav-item {
-  position: relative;
-}
-
 .nav-link {
   position: relative;
   color: #838383;
@@ -60,15 +56,15 @@
         <i class="bi bi-speedometer"></i>&emsp;
         <span class="nav-text">Dashboard</span></RouterLink
       >
-      <RouterLink class="nav-link" to="/dashboard/applicants">
+      <RouterLink class="nav-link" to="/dashboard/applicants/detail">
         <i class="bi bi-people"></i>&emsp;
         <span class="nav-text">Applicant</span></RouterLink
       >
-      <RouterLink class="nav-link" to="/dashboard/jobs">
+      <RouterLink class="nav-link" to="/dashboard/jobs/create">
         <i class="bi bi-briefcase"></i>&emsp;
         <span class="nav-text">Job Post</span></RouterLink
       >
-      <RouterLink class="nav-link" to="password.change">
+      <RouterLink class="nav-link" to="/dashboard/change-password">
         <i class="bi bi-gear"></i>&emsp;
         <span class="nav-text">Setting</span></RouterLink
       >
@@ -78,6 +74,7 @@
         <i class="bi bi-box-arrow-right"></i> &emsp;
         <span class="nav-text">Logout</span></RouterLink
       >
+      <hr />
       <div class="text-center">
         <button
           class="text-center rounded-circle border-0 bg-primary p-2 fs-5"
