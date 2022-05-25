@@ -80,7 +80,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <p class="fs-5 lh-lg text-white">{{ vacancy.type }}</p>
             <div class="d-flex gap-3 hero-buttons">
               <RouterLink
-                to="/apply"
+                :to="`/apply/${this.$route.params.id}`"
                 class="bg-white border-0 text-primary rounded-pill px-5 py-2 text-decoration-none"
               >
                 Daftar

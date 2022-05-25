@@ -62,14 +62,19 @@ import FooterComponent from "@/components/FooterComponent.vue";
             id="vector1"
           />
           <div class="col-12 col-md-6 z-index-1 p-5">
-            <p class="fs-1 fw-bold lh-lg text-white">Front End Developer</p>
-            <p class="fs-5 lh-lg text-white">Internship</p>
+            <p class="fs-1 fw-bold lh-lg text-white">
+              {{ vacancy.name }}
+            </p>
+            <p class="fs-5 lh-lg text-white">
+              {{ vacancy.type }}
+            </p>
             <div class="d-flex gap-3 hero-buttons">
-              <button
-                class="bg-white border-0 text-primary rounded-pill px-5 py-2"
+              <a
+                href="#form"
+                class="bg-white text-decoration-none border-0 text-primary rounded-pill px-5 py-2"
               >
                 Daftar
-              </button>
+              </a>
               <button
                 class="bg-primary text-white rounded-pill px-5 py-2"
                 style="border: 0.5px solid white"
@@ -92,168 +97,175 @@ import FooterComponent from "@/components/FooterComponent.vue";
         </div>
       </section>
       <div class="m-5">
-        <div class="row g-4">
-          <div class="col-12 col-md-6">
-            <div class="card shadow rounded-30px p-3">
-              <p class="text-primary fs-4">Data Diri</p>
-              <hr />
-              <div class="mb-3">
-                <label class="form-label">Nama Lengkap</label>
-                <input
-                  type="text"
-                  name="name"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Jenis Kelamin</label>
-                <select
-                  name="gender"
-                  class="form-select rounded-pill py-2 bg-grey input-border"
-                >
-                  <option value="Laki-laki">Laki-laki</option>
-                  <option value="Perempuan">Perempuan</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Tanggal Lahir</label>
-                <input
-                  type="date"
-                  name="date_birth"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Tempat Lahir</label>
-                <input
-                  type="text"
-                  name="place_birth"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Usia</label>
-                <input
-                  type="number"
-                  name="age"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Alamat</label>
-                <input
-                  type="text"
-                  name="address"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Kota</label>
-                <input
-                  type="text"
-                  name="city"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Telepon</label>
-                <input
-                  type="text"
-                  name="phone"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Media Sosial</label>
-                <input
-                  type="text"
-                  name="media_social"
-                  class="form-control rounded-pill py-2 bg-grey input-border"
-                />
-              </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="d-flex flex-column gap-3">
+        <form>
+          <div class="row g-4">
+            <div class="col-12 col-md-6">
               <div class="card shadow rounded-30px p-3">
-                <p class="text-primary fs-4">Riwayat Pendidikan</p>
+                <p id="form" class="text-primary fs-4">Data Diri</p>
                 <hr />
                 <div class="mb-3">
-                  <label class="form-label">Pendidikan</label>
+                  <label class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Jenis Kelamin</label>
                   <select
-                    name="education"
+                    name="gender"
                     class="form-select rounded-pill py-2 bg-grey input-border"
                   >
-                    <option value="-">-</option>
-                    <option value="SMA / SMK">SMA / SMK</option>
-                    <option value="Politeknik">Politeknik</option>
-                    <option value="Universitas">Universitas</option>
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
                   </select>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Jurusan</label>
+                  <label class="form-label">Tanggal Lahir</label>
+                  <input
+                    type="date"
+                    name="date_birth"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Tempat Lahir</label>
                   <input
                     type="text"
-                    name="major"
+                    name="place_birth"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Universitas</label>
+                  <label class="form-label">Usia</label>
+                  <input
+                    type="number"
+                    name="age"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Alamat</label>
                   <input
                     type="text"
-                    name="univercity"
-                    class="form-control rounded-pill py-2 bg-grey input-border"
-                  />
-                </div>
-              </div>
-              <div class="card shadow rounded-30px p-3">
-                <p class="text-primary fs-4">Upload File</p>
-                <hr />
-                <div class="mb-3">
-                  <label class="form-label">CV</label>
-                  <input
-                    type="file"
-                    name="cv"
+                    name="address"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Portofolio</label>
+                  <label class="form-label">Kota</label>
                   <input
-                    type="file"
-                    name="portofolio"
+                    type="text"
+                    name="city"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Sertifikat</label>
+                  <label class="form-label">Telepon</label>
                   <input
-                    type="file"
-                    name="certificate"
+                    type="text"
+                    name="phone"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Foto</label>
+                  <label class="form-label">Media Sosial</label>
                   <input
-                    type="file"
-                    name="foto"
+                    type="text"
+                    name="media_social"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
               </div>
             </div>
+            <div class="col-12 col-md-6">
+              <div class="d-flex flex-column gap-3">
+                <div class="card shadow rounded-30px p-3">
+                  <p class="text-primary fs-4">Riwayat Pendidikan</p>
+                  <hr />
+                  <div class="mb-3">
+                    <label class="form-label">Pendidikan</label>
+                    <select
+                      name="education"
+                      class="form-select rounded-pill py-2 bg-grey input-border"
+                    >
+                      <option value="-">-</option>
+                      <option value="SMA / SMK">SMA / SMK</option>
+                      <option value="Politeknik">Politeknik</option>
+                      <option value="Universitas">Universitas</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Jurusan</label>
+                    <input
+                      type="text"
+                      name="major"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Universitas</label>
+                    <input
+                      type="text"
+                      name="univercity"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                </div>
+                <div class="card shadow rounded-30px p-3">
+                  <p class="text-primary fs-4">Upload File</p>
+                  <hr />
+                  <div class="mb-3">
+                    <label class="form-label">CV</label>
+                    <input
+                      type="file"
+                      name="cv"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Portofolio</label>
+                    <input
+                      type="file"
+                      name="portofolio"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Sertifikat</label>
+                    <input
+                      type="file"
+                      name="certificate"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Foto</label>
+                    <input
+                      type="file"
+                      name="foto"
+                      class="form-control rounded-pill py-2 bg-grey input-border"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+          <div class="float-end">
+            <button class="text-white bg-dark rounded-pill py-2 px-5">
+              Daftar
+            </button>
+          </div>
+        </form>
       </div>
     </main>
     <FooterComponent />
@@ -261,7 +273,38 @@ import FooterComponent from "@/components/FooterComponent.vue";
 </template>
 
 <script>
+import { ref } from "vue";
+import axios from "../plugins/axios";
+
 export default {
-  mounted: function () {},
+  data() {
+    return {
+      vacancy: ref({}),
+      loading: ref(true),
+      error: ref(false),
+    };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.fetchDetailVacancy();
+      },
+
+      { immediate: true }
+    );
+  },
+  methods: {
+    async fetchDetailVacancy() {
+      try {
+        const { data } = await axios.get(
+          `careers-detail/${this.$route.params.id}`
+        );
+        this.vacancy = data.data;
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
 };
 </script>
