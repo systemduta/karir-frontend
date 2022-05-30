@@ -14,7 +14,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 <template>
   <div class="d-flex">
     <Sidebar />
-    <div class="w-100 bg-gray p-5">
+    <div class="w-100 bg-grey p-5">
       <div class="container">
         <Header title="Edit Job" />
         <div class="card" style="border-radius: 20px">

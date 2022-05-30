@@ -6,7 +6,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 <template>
   <div class="d-flex">
     <Sidebar />
-    <div class="bg-gray p-5 w-100">
+    <div class="bg-grey p-5 w-100">
       <div class="container">
         <Header title="Admin Settings" />
         <div class="card" style="border-radius: 20px">

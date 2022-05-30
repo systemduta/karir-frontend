@@ -6,7 +6,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 <template>
   <div class="d-flex">
     <Sidebar />
-    <div class="w-100 bg-gray p-5">
+    <div class="w-100 bg-grey p-5">
       <div class="container">
         <Header title="Applicant" />
         <div class="d-flex justify-content-between">
