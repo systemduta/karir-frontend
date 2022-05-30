@@ -21,14 +21,15 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
           <div id="ds-cover">
             <div style="height: 140px"></div>
           </div>
-          <form class="p-4">
+          <form id="createJobForm" @submit.prevent="postNewJob" class="p-4">
             <div class="row">
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <label class="form-label">Posisi</label>
                   <input
                     type="text"
-                    name="position"
+                    name="name"
+                    v-model="form.name"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -36,6 +37,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                   <label class="form-label">Job Description</label>
                   <textarea
                     name="jobdesc"
+                    v-model="form.jobdesc"
                     class="form-control bg-grey input-border"
                     style="border-radius: 20px"
                     rows="7"
@@ -45,6 +47,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                   <label class="form-label">Kualifikasi</label>
                   <textarea
                     name="qualification"
+                    v-model="form.qualification"
                     class="form-control bg-grey input-border"
                     style="border-radius: 20px"
                     rows="7"
@@ -52,10 +55,11 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Periode Pendaftaran</label>
+                  <label class="form-label">Tenggat Pendaftaran</label>
                   <input
-                    type="text"
-                    name="registration-period"
+                    type="date"
+                    v-model="form.date"
+                    name="date"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -63,7 +67,8 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                   <label class="form-label">Penempatan</label>
                   <input
                     type="text"
-                    name="placement"
+                    name="address"
+                    v-model="form.address"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -72,30 +77,22 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                   <input
                     type="file"
                     name="image"
+                    @change="handleFileChange($event)"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                     accept="image/*"
                   />
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <label class="form-label">Tipe</label>
                   <select
-                    name="type"
+                    name="category_id"
+                    v-model="form.category_id"
                     class="form-select rounded-pill py-2 bg-grey input-border"
                   >
-                    <option value="internship">Internship</option>
-                    <option value="fulltime">Fulltime</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Status</label>
-                  <select
-                    name="status"
-                    class="form-select rounded-pill py-2 bg-grey input-border"
-                  >
-                    <option value="Active">Active</option>
-                    <option value="inactive">Inctive</option>
+                    <option value="1">Fulltime</option>
+                    <option value="2">Internship</option>
                   </select>
                 </div>
               </div>
@@ -111,3 +108,55 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
     </div>
   </div>
 </template>
+
+<script>
+import { ref } from "vue";
+import axios from "../../../plugins/axios";
+
+export default {
+  data() {
+    return {
+      form: ref({
+        name: "Position 1",
+        jobdesc:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius fuga vitae nam, aperiam necessitatibus quas fugiat sint mollitia alias debitis!",
+        qualification:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius fuga vitae nam, aperiam necessitatibus quas fugiat sint mollitia alias debitis!",
+        date: "2002-02-02",
+        address: "Online",
+        category_id: "1",
+        image: null,
+      }),
+      errors: ref(null),
+      loading: ref(false),
+    };
+  },
+  methods: {
+    async postNewJob() {
+      try {
+        this.loading = true;
+        const formData = new FormData(document.getElementById("createJobForm"));
+        formData.append("image", this.form.image);
+        // TODO: delete line below
+        formData.append("type", "DELETE THIS");
+        await axios.post(`lowongan-create`, formData, {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        this.loading = false;
+        this.success = true;
+        this.$router.push("/dashboard/jobs");
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+        this.error = error.response.status;
+      }
+    },
+    handleFileChange(event) {
+      this.form.image = event.target.files[0];
+    },
+  },
+};
+</script>
