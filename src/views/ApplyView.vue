@@ -1,6 +1,7 @@
 <script setup>
 import NavigationBar from "@/components/NavigationBar.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
 </script>
 
 <style scoped>
@@ -107,7 +108,12 @@ import FooterComponent from "@/components/FooterComponent.vue";
         </div>
       </section>
       <div class="m-5">
-        <form v-if="!error">
+        <form
+          id="applyForm"
+          v-if="!error"
+          @submit.prevent="postApply"
+          enctype="multipart/form-data"
+        >
           <div class="row g-4">
             <div class="col-12 col-md-6">
               <div class="card shadow rounded-30px p-3">
@@ -116,16 +122,20 @@ import FooterComponent from "@/components/FooterComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Nama Lengkap</label>
                   <input
+                    required
                     type="text"
                     name="name"
+                    v-model="form.name"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Email</label>
                   <input
+                    required
                     type="email"
                     name="email"
+                    v-model="form.email"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -133,6 +143,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   <label class="form-label">Jenis Kelamin</label>
                   <select
                     name="gender"
+                    v-model="form.gender"
                     class="form-select rounded-pill py-2 bg-grey input-border"
                   >
                     <option value="Laki-laki">Laki-laki</option>
@@ -142,56 +153,71 @@ import FooterComponent from "@/components/FooterComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Tanggal Lahir</label>
                   <input
+                    required
                     type="date"
                     name="date_birth"
+                    v-model="form.date_birth"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Tempat Lahir</label>
                   <input
+                    required
                     type="text"
                     name="place_birth"
+                    v-model="form.place_birth"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Usia</label>
                   <input
+                    required
                     type="number"
                     name="age"
+                    min="0"
+                    v-model="form.age"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Alamat</label>
                   <input
+                    required
                     type="text"
                     name="address"
+                    v-model="form.address"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kota</label>
                   <input
+                    required
                     type="text"
                     name="city"
+                    v-model="form.city"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Telepon</label>
                   <input
+                    required
                     type="text"
                     name="phone"
+                    v-model="form.phone"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Media Sosial</label>
                   <input
+                    required
                     type="text"
                     name="media_social"
+                    v-model="form.media_social"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -206,6 +232,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
                     <label class="form-label">Pendidikan</label>
                     <select
                       name="education"
+                      v-model="form.education"
                       class="form-select rounded-pill py-2 bg-grey input-border"
                     >
                       <option value="-">-</option>
@@ -217,16 +244,20 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   <div class="mb-3">
                     <label class="form-label">Jurusan</label>
                     <input
+                      required
                       type="text"
                       name="major"
+                      v-model="form.major"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Universitas</label>
                     <input
+                      required
                       type="text"
                       name="univercity"
+                      v-model="form.univercity"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
@@ -237,7 +268,9 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   <div class="mb-3">
                     <label class="form-label">CV</label>
                     <input
+                      required
                       type="file"
+                      @change="handleFileChange($event)"
                       name="cv"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
@@ -245,15 +278,19 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   <div class="mb-3">
                     <label class="form-label">Portofolio</label>
                     <input
+                      required
                       type="file"
-                      name="portofolio"
+                      @change="handleFileChange($event)"
+                      name="fortofolio"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Sertifikat</label>
                     <input
+                      required
                       type="file"
+                      @change="handleFileChange($event)"
                       name="certificate"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
@@ -261,7 +298,9 @@ import FooterComponent from "@/components/FooterComponent.vue";
                   <div class="mb-3">
                     <label class="form-label">Foto</label>
                     <input
+                      required
                       type="file"
+                      @change="handleFileChange($event)"
                       name="foto"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
@@ -271,9 +310,30 @@ import FooterComponent from "@/components/FooterComponent.vue";
             </div>
           </div>
           <div class="float-end">
-            <button class="text-white bg-dark rounded-pill py-2 px-5">
+            <div v-if="loadingApply" class="d-flex justify-content-between">
+              <LoadingComponent />
+            </div>
+            <p v-if="errorApply" class="text-danger">
+              Error code:{{ errorApply }}
+            </p>
+            <button
+              v-if="!loadingApply"
+              :class="`${
+                loadingApply && 'disabled'
+              } text-white bg-dark rounded-pill py-2 px-5`"
+              type="submit"
+            >
               Daftar
             </button>
+            <div v-if="successApply">
+              <p class="text-success">Berhasil Mendaftar!</p>
+              <RouterLink
+                to="/"
+                class="text-decoration-none text-white bg-primary rounded-pill py-2 px-5"
+              >
+                Back to Home
+              </RouterLink>
+            </div>
           </div>
         </form>
       </div>
@@ -292,6 +352,28 @@ export default {
       vacancy: ref({}),
       loading: ref(true),
       error: ref(false),
+      form: ref({
+        name: "sample name",
+        email: "sample@sample.com",
+        gender: "Laki-laki",
+        phone: "1234567890",
+        date_birth: "1001-01-01",
+        place_birth: "Rumah Sakit",
+        age: 1000,
+        address: "sample address",
+        city: "sample city",
+        media_social: "sample account",
+        education: "Universitas",
+        major: "sample major",
+        univercity: "sample campuss",
+        cv: null,
+        fortofolio: null,
+        certificate: null,
+        foto: null,
+      }),
+      loadingApply: ref(false),
+      errorApply: ref(false),
+      successApply: ref(false),
     };
   },
   created() {
@@ -316,6 +398,32 @@ export default {
         this.loading = false;
         this.error = error;
       }
+    },
+    async postApply() {
+      const formData = new FormData(document.getElementById("applyForm"));
+      formData.append("cv", this.form.cv);
+      formData.append("foto", this.form.foto);
+      formData.append("fortofolio", this.form.fortofolio);
+      formData.append("certificate", this.form.certificate);
+
+      try {
+        this.loadingApply = true;
+        await axios.post(`careers-daftar/${this.$route.params.id}`, formData, {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        this.loadingApply = false;
+        this.successApply = true;
+      } catch (error) {
+        console.error(error.response.status);
+        this.loadingApply = false;
+        this.errorApply = error.response.status;
+      }
+    },
+    handleFileChange(event) {
+      this.form = { ...this.form, [event.target.name]: event.target.files[0] };
     },
   },
 };

@@ -25,9 +25,7 @@
 </style>
 
 <template>
-  <div
-    class="d-flex flex-column justify-content-between sidebar accordion p-3 border"
-  >
+  <div class="shadow d-flex flex-column sidebar accordion p-3 border">
     <div>
       <RouterLink
         class="d-flex align-items-center justify-content-center"
@@ -56,11 +54,11 @@
         <i class="bi bi-speedometer"></i>&emsp;
         <span class="nav-text">Dashboard</span></RouterLink
       >
-      <RouterLink class="nav-link" to="/dashboard/applicants/detail">
+      <RouterLink class="nav-link" to="/dashboard/applicants">
         <i class="bi bi-people"></i>&emsp;
         <span class="nav-text">Applicant</span></RouterLink
       >
-      <RouterLink class="nav-link" to="/dashboard/jobs/create">
+      <RouterLink class="nav-link" to="/dashboard/jobs">
         <i class="bi bi-briefcase"></i>&emsp;
         <span class="nav-text">Job Post</span></RouterLink
       >
@@ -70,7 +68,7 @@
       >
     </div>
     <div>
-      <div class="nav-link" @click="userLogout">
+      <div class="nav-link" style="cursor: pointer" @click="userLogout">
         <i class="bi bi-box-arrow-right"></i> &emsp;
         <span class="nav-text">Logout</span>
       </div>

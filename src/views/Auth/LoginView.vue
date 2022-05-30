@@ -161,7 +161,9 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     </div>
                     <div class="col-12">
                       <button
-                        class="btn bg-primary rounded-pill w-100 py-3"
+                        :class="` ${
+                          loading && 'disabled'
+                        } btn bg-primary rounded-pill w-100 py-3`"
                         type="submit"
                       >
                         Sign In

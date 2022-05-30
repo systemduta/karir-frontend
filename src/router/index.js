@@ -11,8 +11,10 @@ import ResetPasswordView from "../views/Auth/ResetPasswordView.vue";
 import DashboardView from "../views/Dashboard/DashboardView.vue";
 import ChangePasswordView from "../views/Dashboard/ChangePasswordView.vue";
 
+import ApplicantsView from "../views/Dashboard/Applicants/ApplicantsView.vue";
 import ApplicantDetailView from "../views/Dashboard/Applicants/DetailView.vue";
 
+import JobsView from "../views/Dashboard/Jobs/JobsView.vue";
 import JobCreateView from "../views/Dashboard/Jobs/CreateView.vue";
 import JobEditView from "../views/Dashboard/Jobs/EditView.vue";
 
@@ -67,8 +69,22 @@ const routes = [
     },
   },
   {
+    path: "/dashboard/applicants",
+    component: ApplicantsView,
+    meta: {
+      // auth: true,
+    },
+  },
+  {
     path: "/dashboard/applicants/detail",
     component: ApplicantDetailView,
+    meta: {
+      // auth: true,
+    },
+  },
+  {
+    path: "/dashboard/jobs",
+    component: JobsView,
     meta: {
       // auth: true,
     },
