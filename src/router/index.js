@@ -16,6 +16,8 @@ import ApplicantDetailView from "../views/Dashboard/Applicants/DetailView.vue";
 import JobCreateView from "../views/Dashboard/Jobs/CreateView.vue";
 import JobEditView from "../views/Dashboard/Jobs/EditView.vue";
 
+import store from "../store";
+
 const routes = [
   {
     path: "/",
@@ -26,46 +28,90 @@ const routes = [
     component: VacancyView,
   },
   {
-    path: "/apply",
+    path: "/apply/:id",
     component: ApplyView,
   },
   {
     path: "/login",
     component: LoginView,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: "/forgot-password",
     component: ForgotPasswordView,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: "/reset-password",
     component: ResetPasswordView,
+    meta: {
+      guest: true,
+    },
   },
   {
     path: "/dashboard",
     component: DashboardView,
+    meta: {
+      // auth: true,
+    },
   },
   {
     path: "/dashboard/change-password",
     component: ChangePasswordView,
+    meta: {
+      // auth: true,
+    },
   },
   {
     path: "/dashboard/applicants/detail",
     component: ApplicantDetailView,
+    meta: {
+      // auth: true,
+    },
   },
   {
     path: "/dashboard/jobs/create",
     component: JobCreateView,
+    meta: {
+      // auth: true,
+    },
   },
   {
     path: "/dashboard/jobs/edit",
     component: JobEditView,
+    meta: {
+      // auth: true,
+    },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.auth)) {
+    if (store.getters.isLoggedIn && store.getters.user) {
+      next();
+      return;
+    }
+    next("/login");
+  }
+
+  if (to.matched.some((record) => record.meta.guest)) {
+    if (!store.getters.isLoggedIn) {
+      next();
+      return;
+    }
+    next("/dashboard");
+  }
+
+  next();
 });
 
 export default router;

@@ -70,10 +70,10 @@
       >
     </div>
     <div>
-      <RouterLink class="nav-link" to="/logout">
+      <div class="nav-link" @click="userLogout">
         <i class="bi bi-box-arrow-right"></i> &emsp;
-        <span class="nav-text">Logout</span></RouterLink
-      >
+        <span class="nav-text">Logout</span>
+      </div>
       <hr />
       <div class="text-center">
         <button
@@ -105,6 +105,21 @@ export default {
         ? '<i class="bi bi-arrow-right"></i>'
         : '<i class="bi bi-arrow-left"></i>';
     });
+  },
+  methods: {
+    userLogout() {
+      this.loading = true;
+      this.$store
+        .dispatch("logout")
+        .then(() => {
+          this.loading = false;
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.errors = error.response.data.errors;
+        });
+    },
   },
 };
 </script>

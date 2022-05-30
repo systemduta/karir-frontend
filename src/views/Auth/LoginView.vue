@@ -1,3 +1,7 @@
+<script setup>
+import LoadingComponent from "@/components/LoadingComponent.vue";
+</script>
+
 <style scoped>
 @media screen and (max-width: 600px) {
   #bubles {
@@ -109,16 +113,22 @@
                   <div class="pt-4 pb-2">
                     <p class="text-center" style="color: #5c5c5c">
                       Sign in to your account to continue
+                      {{ JSON.stringify(errors) }}
                     </p>
+                    <div v-if="loading" class="d-flex justify-content-center">
+                      <LoadingComponent />
+                    </div>
                   </div>
-                  <form class="row g-3">
+                  <form class="row g-3" @submit.prevent="userLogin">
                     <div class="col-12">
                       <input
                         type="email"
                         name="email"
                         placeholder="Email"
                         class="form-control rounded-pill shadow py-2"
+                        v-model="form.email"
                         required
+                        autofocus
                       />
                       <div class="invalid-feedback">
                         Please enter your email.
@@ -130,27 +140,11 @@
                         name="password"
                         placeholder="Password"
                         class="form-control rounded-pill shadow py-2"
+                        v-model="form.password"
                         required
                       />
                       <div class="invalid-feedback">
                         Please enter your password!
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="form-check">
-                        <input
-                          class="form-check-input"
-                          type="checkbox"
-                          name="remember"
-                          value="1"
-                          id="rememberMe"
-                        />
-                        <label
-                          class="form-check-label"
-                          style="color: #5c5c5c"
-                          for="rememberMe"
-                          >Remember me</label
-                        >
                       </div>
                     </div>
                     <div class="col-12">
@@ -190,3 +184,33 @@
     </div>
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      form: {
+        email: "",
+        password: "",
+      },
+      errors: null,
+      loading: false,
+    };
+  },
+  methods: {
+    userLogin() {
+      this.loading = true;
+      this.$store
+        .dispatch("login", this.form)
+        .then(() => {
+          this.loading = false;
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.errors = error.response.data.errors;
+        });
+    },
+  },
+};
+</script>

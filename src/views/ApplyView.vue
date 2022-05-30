@@ -62,6 +62,16 @@ import FooterComponent from "@/components/FooterComponent.vue";
             id="vector1"
           />
           <div class="col-12 col-md-6 z-index-1 p-5">
+            <div v-if="loading" class="placeholder-glow">
+              <div class="placeholder" style="width: 400px; height: 30px"></div>
+              <br />
+              <div class="placeholder" style="width: 200px; height: 20px"></div>
+            </div>
+            <div v-if="error">
+              <p class="fs-1 fw-bold lh-lg text-white">
+                Upss.. terjadi kesalahan, coba lagi nanti
+              </p>
+            </div>
             <p class="fs-1 fw-bold lh-lg text-white">
               {{ vacancy.name }}
             </p>
@@ -97,7 +107,7 @@ import FooterComponent from "@/components/FooterComponent.vue";
         </div>
       </section>
       <div class="m-5">
-        <form>
+        <form v-if="!error">
           <div class="row g-4">
             <div class="col-12 col-md-6">
               <div class="card shadow rounded-30px p-3">
@@ -300,9 +310,11 @@ export default {
         const { data } = await axios.get(
           `careers-detail/${this.$route.params.id}`
         );
+        this.loading = false;
         this.vacancy = data.data;
       } catch (error) {
-        console.error(error);
+        this.loading = false;
+        this.error = error;
       }
     },
   },

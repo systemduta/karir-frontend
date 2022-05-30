@@ -76,6 +76,11 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             id="vector1"
           />
           <div class="col-12 col-md-6 z-index-1 p-5">
+            <div v-if="loading" class="placeholder-glow">
+              <div class="placeholder" style="width: 400px; height: 30px"></div>
+              <br />
+              <div class="placeholder" style="width: 200px; height: 20px"></div>
+            </div>
             <p class="fs-1 fw-bold lh-lg text-white">{{ vacancy.name }}</p>
             <p class="fs-5 lh-lg text-white">{{ vacancy.type }}</p>
             <div class="d-flex gap-3 hero-buttons">
@@ -113,6 +118,11 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <div class="card shadow border-radius-30px p-3">
                 <p class="text-primary fs-4">Job Overview</p>
                 <hr />
+                <div v-if="loading" class="placeholder-glow">
+                  <div class="placeholder col-12"></div>
+                  <br />
+                  <div class="placeholder col-12"></div>
+                </div>
                 <div>
                   {{ vacancy.jobdesc }}
                 </div>
@@ -121,6 +131,11 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <p class="text-primary fs-4">Kualifikasi</p>
                 <hr />
                 <div>
+                  <div v-if="loading" class="placeholder-glow">
+                    <div class="placeholder col-12"></div>
+                    <br />
+                    <div class="placeholder col-12"></div>
+                  </div>
                   <div>
                     {{ vacancy.qualification }}
                   </div>
@@ -133,11 +148,17 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <div class="card shadow border-radius-30px p-3">
                 <p class="text-primary fs-4">Tenggat Pendaftaran</p>
                 <hr />
+                <div v-if="loading" class="placeholder-glow">
+                  <div class="placeholder col-12"></div>
+                </div>
                 <p>{{ vacancy.date }}</p>
               </div>
               <div class="card shadow border-radius-30px p-3">
                 <p class="text-primary fs-4">Penempatan</p>
                 <hr />
+                <div v-if="loading" class="placeholder-glow">
+                  <div class="placeholder col-12"></div>
+                </div>
                 <p>{{ vacancy.address }}</p>
               </div>
             </div>
@@ -146,10 +167,10 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
         <div>
           <p class="text-center text-primary fs-3">Karir Lainnya</p>
           <div class="row g-3 justify-content-center">
-            <div v-if="loading" class="d-flex justify-content-center">
+            <div v-if="loadingVacancies" class="d-flex justify-content-center">
               <LoadingComponent />
             </div>
-            <div v-if="error" class="text-center">
+            <div v-if="errorVacancies" class="text-center">
               <p class="fs-4">Upss, something went wrong</p>
             </div>
             <VacancyCard
@@ -176,9 +197,11 @@ export default {
   data() {
     return {
       vacancy: ref({}),
-      latestVacancies: ref([]),
       loading: ref(true),
       error: ref(false),
+      latestVacancies: ref([]),
+      loadingVacancies: ref(true),
+      errorVacancies: ref(false),
     };
   },
   created() {
@@ -203,19 +226,21 @@ export default {
         const { data } = await axios.get(
           `careers-detail/${this.$route.params.id}`
         );
+        this.loading = false;
         this.vacancy = data.data;
       } catch (error) {
-        console.error(error);
+        this.loading = false;
+        this.error = true;
       }
     },
     async fetchLatestVacancy() {
       try {
         const { data } = await axios.get(`careers`);
-        this.loading = false;
+        this.loadingVacancies = false;
         this.latestVacancies = data.data;
       } catch (error) {
-        this.loading = false;
-        this.error = true;
+        this.loadingVacancies = false;
+        this.errorVacancies = true;
       }
     },
   },

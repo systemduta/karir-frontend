@@ -8,5 +8,16 @@ import "./index.css";
 import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
+import store from "./store";
 
-createApp(App).use(router).mount("#app");
+import { setHeaderToken } from "./utils/auth";
+
+const token = localStorage.getItem("token");
+if (token) {
+  setHeaderToken(token);
+}
+
+store
+  .dispatch("getUser", token)
+  .then(() => createApp(App).use(router).use(store).mount("#app"))
+  .catch((error) => console.log(error));
