@@ -1,6 +1,7 @@
 <script setup>
 import Header from "@/components/Dashboard/HeaderComponent.vue";
 import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
 </script>
 
 <style scoped>
@@ -21,7 +22,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
           <div id="ds-cover">
             <div style="height: 140px"></div>
           </div>
-          <form id="createJobForm" @submit.prevent="postNewJob" class="p-4">
+          <form id="jobForm" @submit.prevent="postNewJob" class="p-4">
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="mb-3">
@@ -75,6 +76,7 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Thumbnail</label>
                   <input
+                    required
                     type="file"
                     name="image"
                     @change="handleFileChange($event)"
@@ -98,7 +100,26 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
               </div>
             </div>
             <div class="float-end">
-              <button class="text-white bg-dark rounded-pill py-2 px-5">
+              <div
+                v-if="error"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                {{ error }}
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div v-if="loading" class="d-flex justify-content-between">
+                <LoadingComponent />
+              </div>
+              <button
+                v-if="!loading"
+                class="text-white bg-dark rounded-pill py-2 px-5"
+              >
                 Post
               </button>
             </div>
@@ -127,7 +148,7 @@ export default {
         category_id: "1",
         image: null,
       }),
-      errors: ref(null),
+      error: ref(null),
       loading: ref(false),
     };
   },
@@ -135,9 +156,8 @@ export default {
     async postNewJob() {
       try {
         this.loading = true;
-        const formData = new FormData(document.getElementById("createJobForm"));
+        const formData = new FormData(document.getElementById("jobForm"));
         formData.append("image", this.form.image);
-        // TODO: delete line below
         formData.append("type", "DELETE THIS");
         await axios.post(`lowongan-create`, formData, {
           headers: {
@@ -146,12 +166,11 @@ export default {
           },
         });
         this.loading = false;
-        this.success = true;
+        this.error = false;
         this.$router.push("/dashboard/jobs");
       } catch (error) {
-        console.log(error);
         this.loading = false;
-        this.error = error.response.status;
+        this.error = error;
       }
     },
     handleFileChange(event) {

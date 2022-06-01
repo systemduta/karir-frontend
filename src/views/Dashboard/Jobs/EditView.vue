@@ -1,6 +1,7 @@
 <script setup>
 import Header from "@/components/Dashboard/HeaderComponent.vue";
 import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
+import LoadingComponent from "@/components/LoadingComponent.vue";
 </script>
 
 <style scoped>
@@ -21,96 +22,107 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
           <div id="ds-cover">
             <div style="height: 140px"></div>
           </div>
-          <form class="p-4">
+          <div v-if="loading" class="my-4 d-flex justify-content-center">
+            <LoadingComponent />
+          </div>
+          <form id="jobForm" @submit.prevent="updateJob" class="p-4">
             <div class="row">
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <label class="form-label">Posisi</label>
                   <input
                     type="text"
-                    name="position"
+                    name="name"
+                    v-model="form.name"
                     class="form-control rounded-pill py-2 bg-grey input-border"
-                    value="Software Engineer"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Job Description</label>
                   <textarea
                     name="jobdesc"
+                    v-model="form.jobdesc"
                     class="form-control bg-grey input-border"
                     style="border-radius: 20px"
                     rows="7"
-                  >
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod illo aliquid consectetur cupiditate a similique at assumenda nulla beatae perspiciatis.
-                </textarea
-                  >
+                  ></textarea>
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kualifikasi</label>
                   <textarea
                     name="qualification"
+                    v-model="form.qualification"
                     class="form-control bg-grey input-border"
                     style="border-radius: 20px"
                     rows="7"
-                  >
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla, consectetur maiores nesciunt blanditiis optio fugit voluptas vel autem mollitia amet.
-                </textarea
-                  >
+                  ></textarea>
                 </div>
 
                 <div class="mb-3">
-                  <label class="form-label">Periode Pendaftaran</label>
+                  <label class="form-label">Tenggat Pendaftaran</label>
                   <input
-                    type="text"
-                    name="registration-period"
+                    type="date"
+                    v-model="form.date"
+                    name="date"
                     class="form-control rounded-pill py-2 bg-grey input-border"
-                    value="20 Mei 2022 - 30 Mei 2022"
                   />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Penempatan</label>
                   <input
                     type="text"
-                    name="placement"
+                    name="address"
+                    v-model="form.address"
                     class="form-control rounded-pill py-2 bg-grey input-border"
-                    value="Online"
                   />
                 </div>
+                <img :src="`${baseUrlImage}${form.image}`" alt="" />
                 <div class="mb-3">
                   <label class="form-label">Thumbnail</label>
                   <input
                     type="file"
                     name="image"
+                    @change="handleFileChange($event)"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                     accept="image/*"
                   />
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <label class="form-label">Tipe</label>
                   <select
-                    name="type"
+                    name="category_id"
+                    v-model="form.category_id"
                     class="form-select rounded-pill py-2 bg-grey input-border"
                   >
-                    <option value="internship">Internship</option>
-                    <option value="fulltime">Fulltime</option>
-                  </select>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Status</label>
-                  <select
-                    name="status"
-                    class="form-select rounded-pill py-2 bg-grey input-border"
-                  >
-                    <option value="Active">Active</option>
-                    <option value="inactive">Inctive</option>
+                    <option value="1">Fulltime</option>
+                    <option value="2">Internship</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="float-end">
-              <button class="text-white bg-dark rounded-pill py-2 px-5">
+              <div
+                v-if="errorUpdate"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                {{ errorUpdate }}
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div v-if="loadingUpdate" class="d-flex justify-content-between">
+                <LoadingComponent />
+              </div>
+              <button
+                v-if="!loadingUpdate"
+                class="text-white bg-dark rounded-pill py-2 px-5"
+              >
                 Update
               </button>
             </div>
@@ -120,3 +132,70 @@ import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
     </div>
   </div>
 </template>
+
+<script>
+import { ref } from "vue";
+import axios from "../../../plugins/axios";
+
+export default {
+  data() {
+    return {
+      baseUrlImage: process.env.VUE_APP_IMAGE_BASE_URL,
+      error: ref(null),
+      loading: ref(false),
+      form: ref({}),
+      errorUpdate: ref(null),
+      loadingUpdate: ref(false),
+    };
+  },
+  created() {
+    this.$watch(
+      () => this.$route.params,
+      () => {
+        this.getDetailJob();
+      },
+
+      { immediate: true }
+    );
+  },
+  methods: {
+    async getDetailJob() {
+      try {
+        this.loading = true;
+        const { data } = await axios.get(
+          `careers-detail/${this.$route.params.id}`
+        );
+        this.loading = false;
+        this.form = data.data;
+      } catch (error) {
+        this.loading = false;
+        this.error = error;
+      }
+    },
+    async updateJob() {
+      try {
+        this.loadingUpdate = true;
+        const formData = new FormData(document.getElementById("jobForm"));
+        formData.append("image", this.form.image);
+        // TODO: delete line below
+        formData.append("type", "DELETE THIS");
+        await axios.post(`lowongan-update/${this.$route.params.id}`, formData, {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
+        this.loadingUpdate = false;
+        this.errorUpdate = false;
+        this.$router.push("/dashboard/jobs");
+      } catch (error) {
+        this.loadingUpdate = false;
+        this.errorUpdate = error;
+      }
+    },
+    handleFileChange(event) {
+      this.form.image = event.target.files[0];
+    },
+  },
+};
+</script>
