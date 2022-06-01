@@ -1,6 +1,6 @@
 <style scoped>
 .sidebar {
-  width: 14rem !important;
+  width: 16rem !important;
   height: 100vh;
   position: relative;
 }
@@ -25,7 +25,7 @@
 </style>
 
 <template>
-  <div class="shadow d-flex flex-column sidebar accordion p-3 border">
+  <div class="d-flex flex-column sidebar accordion p-3 border">
     <div>
       <RouterLink
         class="d-flex align-items-center justify-content-center"
@@ -54,10 +54,48 @@
         <i class="bi bi-speedometer"></i>&emsp;
         <span class="nav-text">Dashboard</span></RouterLink
       >
-      <RouterLink class="nav-link" to="/dashboard/applicants">
+      <div class="accordion border-0" id="accordionExample">
+        <div class="accordion-item border-0">
+          <h2 class="accordion-header border-0" id="headingOne">
+            <button
+              class="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              <i class="bi bi-people"></i>&emsp;
+              <span class="nav-text">Applicant</span>
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse border-0 show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body">
+              <RouterLink
+                class="nav-link"
+                to="/dashboard/applicants/recruitment"
+              >
+                <span class="nav-text">Fulltime</span></RouterLink
+              >
+              <RouterLink
+                class="nav-link"
+                to="/dashboard/applicants/internship"
+              >
+                <span class="nav-text">Intern</span></RouterLink
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <RouterLink class="nav-link" to="/dashboard/applicants">
         <i class="bi bi-people"></i>&emsp;
         <span class="nav-text">Applicant</span></RouterLink
-      >
+      > -->
       <RouterLink class="nav-link" to="/dashboard/jobs">
         <i class="bi bi-briefcase"></i>&emsp;
         <span class="nav-text">Job Post</span></RouterLink

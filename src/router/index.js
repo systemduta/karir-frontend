@@ -69,14 +69,14 @@ const routes = [
     },
   },
   {
-    path: "/dashboard/applicants",
+    path: "/dashboard/applicants/:category",
     component: ApplicantsView,
     meta: {
       // auth: true,
     },
   },
   {
-    path: "/dashboard/applicants/detail",
+    path: "/dashboard/applicants/detail/:id",
     component: ApplicantDetailView,
     meta: {
       // auth: true,
@@ -97,7 +97,7 @@ const routes = [
     },
   },
   {
-    path: "/dashboard/jobs/edit",
+    path: "/dashboard/jobs/edit/:id",
     component: JobEditView,
     meta: {
       // auth: true,

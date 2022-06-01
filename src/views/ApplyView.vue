@@ -79,7 +79,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <p class="fs-5 lh-lg text-white">
               {{ vacancy.type }}
             </p>
-            <div class="d-flex gap-3 hero-buttons">
+            <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <a
                 href="#form"
                 class="bg-white text-decoration-none border-0 text-primary rounded-pill px-5 py-2"
@@ -107,7 +107,26 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div class="w-full" style="height: 200px"></div>
         </div>
       </section>
-      <div class="m-5">
+      <div class="container" v-if="successApply">
+        <div class="d-flex flex-column justify-content-center">
+          <img
+            src="@/assets/images/ilustrations/apply-success.svg"
+            class="img-fluid"
+          />
+          <RouterLink
+            to="/"
+            class="bg-primary bg-gradient text-decoration-none text-center shadow rounded-pill p-4"
+            >Back to home</RouterLink
+          >
+        </div>
+      </div>
+      <div v-if="!successApply" class="m-5">
+        <div class="container" v-if="error">
+          <img
+            src="@/assets/images/ilustrations/no-data.svg"
+            class="img-fluid"
+          />
+        </div>
         <form
           id="applyForm"
           v-if="!error"
@@ -278,7 +297,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   <div class="mb-3">
                     <label class="form-label">Portofolio</label>
                     <input
-                      required
                       type="file"
                       @change="handleFileChange($event)"
                       name="fortofolio"
@@ -310,12 +328,12 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             </div>
           </div>
           <div class="float-end">
+            <p v-if="errorApply" class="text-danger">
+              {{ errorApply }}
+            </p>
             <div v-if="loadingApply" class="d-flex justify-content-between">
               <LoadingComponent />
             </div>
-            <p v-if="errorApply" class="text-danger">
-              Error code:{{ errorApply }}
-            </p>
             <button
               v-if="!loadingApply"
               :class="`${
@@ -392,6 +410,7 @@ export default {
         const { data } = await axios.get(
           `careers-detail/${this.$route.params.id}`
         );
+        this.error = false;
         this.loading = false;
         this.vacancy = data.data;
       } catch (error) {
@@ -408,18 +427,21 @@ export default {
 
       try {
         this.loadingApply = true;
-        await axios.post(`careers-daftar/${this.$route.params.id}`, formData, {
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        });
+        await axios.post(
+          `careers-daftar-asd/${this.$route.params.id}`,
+          formData,
+          {
+            headers: {
+              accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          }
+        );
         this.loadingApply = false;
         this.successApply = true;
       } catch (error) {
-        console.error(error.response.status);
         this.loadingApply = false;
-        this.errorApply = error.response.status;
+        this.errorApply = error;
       }
     },
     handleFileChange(event) {

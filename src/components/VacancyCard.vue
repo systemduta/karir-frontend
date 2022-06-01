@@ -5,7 +5,9 @@
         class="position-absolute bg-primary px-4 py-1"
         style="top: 0px; right: 0px; border-radius: 0 20px 0 20px"
       >
-        <p class="fw-bold">{{ type }}</p>
+        <p class="fw-bold">
+          {{ category_id == 1 ? "Fulltime" : "Internship" }}
+        </p>
       </div>
       <img
         src="https://maesagroup.co.id/wp-content/uploads/2022/03/8-Frontend-Developer-1024x1024.png"
@@ -29,7 +31,7 @@
 export default {
   props: {
     name: String,
-    type: String,
+    category_id: String,
     image: String,
     id: Number,
   },

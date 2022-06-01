@@ -1,7 +1,9 @@
 import { createApp } from "vue";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
 
 import "./index.css";
 

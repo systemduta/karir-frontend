@@ -113,8 +113,20 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   <div class="pt-4 pb-2">
                     <p class="text-center" style="color: #5c5c5c">
                       Sign in to your account to continue
-                      {{ JSON.stringify(errors) }}
                     </p>
+                    <div
+                      v-if="error"
+                      class="alert alert-warning alert-dismissible fade show"
+                      role="alert"
+                    >
+                      Email atau password salah
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
                     <div v-if="loading" class="d-flex justify-content-center">
                       <LoadingComponent />
                     </div>
@@ -147,7 +159,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         Please enter your password!
                       </div>
                     </div>
-                    <div class="col-12">
+                    <!-- <div class="col-12">
                       <div class="float-end">
                         <p style="color: #5c5c5c">
                           Forgot Password?
@@ -158,7 +170,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                           >
                         </p>
                       </div>
-                    </div>
+                    </div> -->
                     <div class="col-12">
                       <button
                         :class="` ${
@@ -195,7 +207,7 @@ export default {
         email: "",
         password: "",
       },
-      errors: null,
+      error: null,
       loading: false,
     };
   },
@@ -205,12 +217,14 @@ export default {
       this.$store
         .dispatch("login", this.form)
         .then(() => {
+          console.log("then");
           this.loading = false;
           this.$router.push("/dashboard");
         })
         .catch((error) => {
+          console.log("catch");
           this.loading = false;
-          this.errors = error.response.data.errors;
+          this.error = error.message;
         });
     },
   },

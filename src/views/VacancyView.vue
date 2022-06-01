@@ -81,9 +81,14 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <br />
               <div class="placeholder" style="width: 200px; height: 20px"></div>
             </div>
+            <div v-if="error">
+              <p class="fs-1 fw-bold lh-lg text-white">
+                Upss.. terjadi kesalahan, coba lagi nanti
+              </p>
+            </div>
             <p class="fs-1 fw-bold lh-lg text-white">{{ vacancy.name }}</p>
             <p class="fs-5 lh-lg text-white">{{ vacancy.type }}</p>
-            <div class="d-flex gap-3 hero-buttons">
+            <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <RouterLink
                 :to="`/apply/${this.$route.params.id}`"
                 class="bg-white border-0 text-primary rounded-pill px-5 py-2 text-decoration-none"
@@ -179,7 +184,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               :id="vacancy.id"
               :name="vacancy.name"
               :image="vacancy.image"
-              :type="vacancy.type"
+              :category_id="vacancy.category_id"
             />
           </div>
         </div>
@@ -226,6 +231,7 @@ export default {
         const { data } = await axios.get(
           `careers-detail/${this.$route.params.id}`
         );
+        this.error = false;
         this.loading = false;
         this.vacancy = data.data;
       } catch (error) {

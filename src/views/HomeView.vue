@@ -91,7 +91,10 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             style="background-color: #e1e1e1; position: absolute; bottom: 0"
             id="filter"
           >
-            <form class="row g-3 justify-content-center align-items-center">
+            <form
+              @submit.prevent="filterVacancies"
+              class="row g-3 justify-content-center align-items-center"
+            >
               <div class="col-12 col-md-5">
                 <input
                   type="text"
@@ -134,20 +137,22 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <p class="fs-4">Upss, something went wrong</p>
           </div>
           <VacancyCard
-            v-for="vacancy in vacancies"
+            v-for="vacancy in vacanciesShowed"
             :key="vacancy.id"
             :id="vacancy.id"
             :name="vacancy.name"
             :image="vacancy.image"
-            :type="vacancy.type"
+            :category_id="vacancy.category_id"
           />
         </div>
-        <div v-if="vacancies.length > 4" class="text-center mt-5">
-          <a
-            href="#"
-            class="bg-primary bg-gradient shadow rounded-pill p-4 text-decoration-none"
-            >Browse more</a
+        <div class="d-flex justify-content-center mt-5">
+          <button
+            v-if="moreToShow"
+            @click="showedCount += moreCount"
+            class="bg-primary bg-gradient border-0 text-center shadow rounded-pill p-4"
           >
+            Browse more
+          </button>
         </div>
       </div>
     </main>
@@ -163,13 +168,23 @@ export default {
   data() {
     return {
       vacancies: ref([]),
-      loading: ref(true),
+      showedCount: ref(4),
+      moreCount: ref(8),
+      loading: ref(false),
       error: ref(false),
       form: {
         query: "",
         type: "",
       },
     };
+  },
+  computed: {
+    vacanciesShowed() {
+      return this.vacancies.slice(0, this.showedCount);
+    },
+    moreToShow() {
+      return this.showedCount < this.vacancies.length;
+    },
   },
   methods: {
     observeFilterComponent() {
@@ -190,7 +205,9 @@ export default {
     },
     async fetchVacanciesData() {
       try {
+        this.loading = true;
         const { data } = await axios.get("careers");
+        this.error = false;
         this.loading = false;
         this.vacancies = data.data;
       } catch (error) {
@@ -198,6 +215,9 @@ export default {
         this.error = true;
       }
     },
+  },
+  filterVacancies() {
+    return 0;
   },
   mounted() {
     this.observeFilterComponent();
