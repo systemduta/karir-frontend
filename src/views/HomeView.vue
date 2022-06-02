@@ -101,18 +101,18 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   name="search"
                   placeholder="Job title or keyword"
                   class="form-control rounded-pill"
-                  v-model="form.query"
+                  v-model="form.name"
                 />
               </div>
               <div class="col-12 col-md-5">
                 <select
                   name="type"
                   class="form-select rounded-pill"
-                  v-model="form.type"
+                  v-model="form.category_id"
                 >
                   <option value="">Filter</option>
-                  <option value="Fulltime">Fulltime</option>
-                  <option value="Intern">Intern</option>
+                  <option value="1">Fulltime</option>
+                  <option value="2">Intern</option>
                 </select>
               </div>
               <div class="col-12 col-md-2">
@@ -129,14 +129,25 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
         </div>
       </section>
       <div class="m-5">
+        <div
+          v-if="loading || loadingFilter"
+          class="d-flex justify-content-center my-3"
+        >
+          <LoadingComponent />
+        </div>
+        <div v-if="error" class="text-center my-3">
+          <p class="fs-4">Upss, something went wrong</p>
+        </div>
         <div class="row g-3 justify-content-center">
-          <div v-if="loading" class="d-flex justify-content-center">
-            <LoadingComponent />
-          </div>
-          <div v-if="error" class="text-center">
-            <p class="fs-4">Upss, something went wrong</p>
+          <div v-if="vacanciesShowed.length == 0">
+            <img
+              src="@/assets/images/ilustrations/no-data.svg"
+              class="img-fluid"
+              alt="Not found"
+            />
           </div>
           <VacancyCard
+            v-else-if="vacanciesShowed.length"
             v-for="vacancy in vacanciesShowed"
             :key="vacancy.id"
             :id="vacancy.id"
@@ -169,13 +180,15 @@ export default {
     return {
       vacancies: ref([]),
       showedCount: ref(4),
-      moreCount: ref(8),
+      moreCount: ref(12),
       loading: ref(false),
       error: ref(false),
       form: {
-        query: "",
-        type: "",
+        name: "",
+        category_id: "",
       },
+      loadingFilter: ref(false),
+      errorFilter: ref(false),
     };
   },
   computed: {
@@ -207,6 +220,7 @@ export default {
       try {
         this.loading = true;
         const { data } = await axios.get("careers");
+        console.log(data.data);
         this.error = false;
         this.loading = false;
         this.vacancies = data.data;
@@ -215,9 +229,21 @@ export default {
         this.error = true;
       }
     },
-  },
-  filterVacancies() {
-    return 0;
+    async filterVacancies() {
+      try {
+        this.loadingFilter = true;
+        const { data } = await axios.get(
+          `search?name=${this.form.name}&category_id=${this.form.category_id}`
+        );
+        this.errorFilter = false;
+        this.loadingFilter = false;
+        this.vacancies = data.data;
+      } catch (error) {
+        this.vacancies = [];
+        this.loadingFilter = false;
+        this.errorFilter = error;
+      }
+    },
   },
   mounted() {
     this.observeFilterComponent();
