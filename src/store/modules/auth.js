@@ -41,7 +41,7 @@ const actions = {
 
     try {
       let response = await axios.get("get_user");
-      commit("setLoggedInUser", response.data.data);
+      commit("setLoggedInUser", response.data.user);
     } catch (error) {
       commit("resetLoggedInUser");
       removeHeaderToken();

@@ -180,7 +180,7 @@ export default {
     return {
       vacancies: ref([]),
       showedCount: ref(4),
-      moreCount: ref(12),
+      moreCount: ref(200),
       loading: ref(false),
       error: ref(false),
       form: {
@@ -220,7 +220,6 @@ export default {
       try {
         this.loading = true;
         const { data } = await axios.get("careers");
-        console.log(data.data);
         this.error = false;
         this.loading = false;
         this.vacancies = data.data;

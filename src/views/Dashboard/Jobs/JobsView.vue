@@ -14,7 +14,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <p></p>
           <RouterLink
             to="/dashboard/jobs/create"
-            class="bg-primary text-decoration-none p-2 px-4 rounded border-2"
+            class="btn bg-primary text-decoration-none p-2 px-4 rounded border-2"
             >+ New Job</RouterLink
           >
         </div>
@@ -25,8 +25,32 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           >
             <LoadingComponent />
           </div>
-          <div v-if="error" class="text-center">
+          <div
+            v-if="error"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
             {{ error }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div
+            v-if="successDelete"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            Data berhasil dihapus
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+              @click="this.successDelete = false"
+            ></button>
           </div>
           <table class="table table-hover mt-5" id="dataTable">
             <thead>
@@ -35,6 +59,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <th scope="col">Position</th>
                 <th scope="col">Deadline</th>
                 <th scope="col">Type</th>
+                <th scope="col">Status</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -44,6 +69,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <td>{{ job.name }}</td>
                 <td>{{ job.date }}</td>
                 <td>{{ job.category_id == 1 ? "Fulltime" : "Intern" }}</td>
+                <td>Belum</td>
                 <td>
                   <div class="d-flex flex-wrap gap-1">
                     <!-- edit -->
@@ -58,7 +84,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         :disabled="loadingDelete"
                         class="badge rounded-pill bg-danger border-0 px-3 py-2 text-white"
                       >
-                        Hapus
+                        Delete
                       </button>
                     </form>
                   </div>
@@ -87,6 +113,7 @@ export default {
       error: ref(false),
       loadingDelete: ref(false),
       errorDelete: ref(false),
+      successDelete: ref(false),
     };
   },
   methods: {
@@ -94,6 +121,7 @@ export default {
       try {
         this.loading = true;
         const { data } = await axios.get("lowongan");
+        console.log(data.data);
         this.jobs = data.data;
         this.error = false;
         this.loading = false;
@@ -102,13 +130,21 @@ export default {
         this.error = error;
       }
     },
+    setDataTable(interval) {
+      setTimeout(() => {
+        $("#dataTable").DataTable();
+      }, interval);
+    },
     async deleteJob(id) {
       try {
         this.loadingDelete = true;
         await axios.delete(`lowongan-delete/${id}`);
         this.loadingDelete = false;
         this.errorDelete = false;
+        this.successDelete = true;
         this.fetchJobsData();
+        $("#dataTable").DataTable().destroy();
+        this.setDataTable(3000);
       } catch (error) {
         this.loadingDelete = false;
         this.errorDelete = error;
@@ -117,9 +153,7 @@ export default {
   },
   mounted() {
     this.fetchJobsData();
-    setTimeout(() => {
-      $("#dataTable").DataTable();
-    }, 5000);
+    this.setDataTable(5000);
   },
 };
 </script>

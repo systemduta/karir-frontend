@@ -14,8 +14,18 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="d-flex justify-content-center mb-2">
             <LoadingComponent />
           </div>
-          <div v-if="error" class="text-center">
+          <div
+            v-if="error"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
             {{ error }}
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
           </div>
           <table class="table table-hover mt-5" id="dataTable">
             <thead>
@@ -32,16 +42,14 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <tr v-for="(applicant, index) in applicants" :key="applicant.id">
                 <th scope="row">{{ index + 1 }}</th>
                 <td>{{ applicant.name }}</td>
-                <td>{{ applicant.date }}</td>
+                <td>{{ applicant.created_at }}</td>
                 <td>
-                  {{ applicant.category_id == 1 ? "Fulltime" : "Intern" }}
+                  {{ applicant.position }}
                 </td>
-                <td>
-                  {{ applicant.status }}
-                </td>
+                <td>Belum</td>
                 <td>
                   <RouterLink
-                    :to="`/dashboard/applicants/detail/${applicant.id}`"
+                    :to="`/dashboard/applicants/detail/${applicant.participant_id}`"
                     class="badge rounded-pill bg-info text-decoration-none px-3 py-2 text-white"
                     >Detail</RouterLink
                   >
@@ -74,7 +82,9 @@ export default {
     this.$watch(
       () => this.$route.params,
       () => {
+        $("#dataTable").DataTable().destroy();
         this.fetchApplicantsData();
+        this.setDataTable(3000);
       },
 
       { immediate: true }
@@ -96,11 +106,14 @@ export default {
         this.error = error;
       }
     },
+    setDataTable(interval) {
+      setTimeout(() => {
+        $("#dataTable").DataTable();
+      }, interval);
+    },
   },
   mounted() {
-    setTimeout(() => {
-      $("#dataTable").DataTable();
-    }, 5000);
+    this.setDataTable(5000);
   },
 };
 </script>

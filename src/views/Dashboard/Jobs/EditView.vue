@@ -76,7 +76,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
-                <img :src="`${baseUrlImage}${form.image}`" alt="" />
+                <img :src="`${backendUrl}/images/${form.image}`" alt="" />
                 <div class="mb-3">
                   <label class="form-label">Thumbnail</label>
                   <input
@@ -140,7 +140,7 @@ import axios from "../../../plugins/axios";
 export default {
   data() {
     return {
-      baseUrlImage: process.env.VUE_APP_IMAGE_BASE_URL,
+      backendUrl: process.env.VUE_APP_BACKEND_BASE_URL,
       error: ref(null),
       loading: ref(false),
       form: ref({}),
@@ -177,8 +177,6 @@ export default {
         this.loadingUpdate = true;
         const formData = new FormData(document.getElementById("jobForm"));
         formData.append("image", this.form.image);
-        // TODO: delete line below
-        formData.append("type", "DELETE THIS");
         await axios.post(`lowongan-update/${this.$route.params.id}`, formData, {
           headers: {
             accept: "application/json",

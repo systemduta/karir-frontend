@@ -104,7 +104,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         <img
                           src="@/assets/logo.png"
                           class="mb-5"
-                          width="191px"
+                          style="width: 191px"
                           alt="Maesa Group Karir"
                         />
                       </a>
@@ -116,7 +116,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     </p>
                     <div
                       v-if="error"
-                      class="alert alert-warning alert-dismissible fade show"
+                      class="alert alert-danger alert-dismissible fade show"
                       role="alert"
                     >
                       Email atau password salah
@@ -217,12 +217,10 @@ export default {
       this.$store
         .dispatch("login", this.form)
         .then(() => {
-          console.log("then");
           this.loading = false;
           this.$router.push("/dashboard");
         })
         .catch((error) => {
-          console.log("catch");
           this.loading = false;
           this.error = error.message;
         });

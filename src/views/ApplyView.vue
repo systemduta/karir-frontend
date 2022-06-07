@@ -325,32 +325,33 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="float-end">
-            <p v-if="errorApply" class="text-danger">
-              {{ errorApply }}
-            </p>
-            <div v-if="loadingApply" class="d-flex justify-content-between">
-              <LoadingComponent />
-            </div>
-            <button
-              v-if="!loadingApply"
-              :class="`${
-                loadingApply && 'disabled'
-              } text-white bg-dark rounded-pill py-2 px-5`"
-              type="submit"
-            >
-              Daftar
-            </button>
-            <div v-if="successApply">
-              <p class="text-success">Berhasil Mendaftar!</p>
-              <RouterLink
-                to="/"
-                class="text-decoration-none text-white bg-primary rounded-pill py-2 px-5"
-              >
-                Back to Home
-              </RouterLink>
+              <div class="float-end mt-5">
+                <div
+                  v-if="errorApply"
+                  class="alert alert-danger alert-dismissible fade show"
+                  role="alert"
+                >
+                  {{ errorApply }}
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div v-if="loadingApply" class="d-flex justify-content-between">
+                  <LoadingComponent />
+                </div>
+                <button
+                  v-if="!loadingApply"
+                  :class="`${
+                    loadingApply && 'disabled'
+                  } btn text-white bg-dark rounded-pill py-2 px-5`"
+                  type="submit"
+                >
+                  Daftar
+                </button>
+              </div>
             </div>
           </div>
         </form>
@@ -427,16 +428,12 @@ export default {
 
       try {
         this.loadingApply = true;
-        await axios.post(
-          `careers-daftar-asd/${this.$route.params.id}`,
-          formData,
-          {
-            headers: {
-              accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        await axios.post(`careers-daftar/${this.$route.params.id}`, formData, {
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        });
         this.loadingApply = false;
         this.successApply = true;
       } catch (error) {

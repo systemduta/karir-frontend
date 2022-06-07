@@ -158,7 +158,6 @@ export default {
         this.loading = true;
         const formData = new FormData(document.getElementById("jobForm"));
         formData.append("image", this.form.image);
-        formData.append("type", "DELETE THIS");
         await axios.post(`lowongan-create`, formData, {
           headers: {
             accept: "application/json",
@@ -177,5 +176,6 @@ export default {
       this.form.image = event.target.files[0];
     },
   },
+  mounted() {},
 };
 </script>

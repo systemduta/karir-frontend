@@ -3,10 +3,8 @@
     <div class="d-flex justify-content-between">
       <p class="fs-2 fw-bold">{{ title }}</p>
       <div class="d-flex gap-4 fs-4">
-        <i class="bi bi-bell"></i>
-        <a href="#" class="text-black">
-          <i class="bi bi-person-square"></i>
-        </a>
+        <i class="bi bi-person-square"></i>
+        {{ user.name }}
       </div>
     </div>
   </header>
@@ -16,6 +14,11 @@
 export default {
   props: {
     title: String,
+  },
+  data() {
+    return {
+      user: this.$store.getters.user ?? { name: "Administrator" },
+    };
   },
 };
 </script>
