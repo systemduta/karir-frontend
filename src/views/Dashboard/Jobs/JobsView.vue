@@ -39,7 +39,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             ></button>
           </div>
           <div
-            v-if="successDelete"
+            v-if="successDelete && !loading"
             class="alert alert-success alert-dismissible fade show"
             role="alert"
           >
@@ -69,20 +69,29 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <td>{{ job.name }}</td>
                 <td>{{ job.date }}</td>
                 <td>{{ job.category_id == 1 ? "Fulltime" : "Intern" }}</td>
-                <td>Belum</td>
+                <td>
+                  <span
+                    v-if="job.status == 1"
+                    class="badge bg-success rounded-pill px-2 py-1"
+                    >Active</span
+                  >
+                  <span v-else class="badge bg-danger rounded-pill px-2 py-1"
+                    >Inactive</span
+                  >
+                </td>
                 <td>
                   <div class="d-flex flex-wrap gap-1">
                     <!-- edit -->
                     <RouterLink
                       :to="`/dashboard/jobs/edit/${job.id}`"
-                      class="badge rounded-pill bg-warning text-decoration-none px-3 py-2 text-white"
+                      class="btn btn-warning text-white"
                       >Edit</RouterLink
                     >
                     <!-- delete -->
                     <form @submit.prevent="deleteJob(job.id)">
                       <button
                         :disabled="loadingDelete"
-                        class="badge rounded-pill bg-danger border-0 px-3 py-2 text-white"
+                        class="btn btn-danger text-white"
                       >
                         Delete
                       </button>
@@ -112,7 +121,6 @@ export default {
       loading: ref(false),
       error: ref(false),
       loadingDelete: ref(false),
-      errorDelete: ref(false),
       successDelete: ref(false),
     };
   },
@@ -147,7 +155,7 @@ export default {
         this.setDataTable(3000);
       } catch (error) {
         this.loadingDelete = false;
-        this.errorDelete = error;
+        this.error = error;
       }
     },
   },
