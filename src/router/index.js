@@ -58,49 +58,49 @@ const routes = [
     path: "/dashboard",
     component: DashboardView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/change-password",
     component: ChangePasswordView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/applicants/:category",
     component: ApplicantsView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/applicants/detail/:id",
     component: ApplicantDetailView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/jobs",
     component: JobsView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/jobs/create",
     component: JobCreateView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
   {
     path: "/dashboard/jobs/edit/:id",
     component: JobEditView,
     meta: {
-      // auth: true,
+      auth: true,
     },
   },
 ];
