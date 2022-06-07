@@ -9,7 +9,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
     <Sidebar />
     <div class="w-100 bg-grey p-5">
       <div class="container">
-        <Header title="Applicant" />
+        <Header :title="`${this.$route.params.category} Applicant`" />
         <div class="rounded shadow bg-white p-3">
           <div v-if="loading" class="d-flex justify-content-center mb-2">
             <LoadingComponent />
