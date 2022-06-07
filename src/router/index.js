@@ -111,23 +111,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta.auth)) {
-    if (store.getters.isLoggedIn && store.getters.user) {
-      next();
-      return;
-    }
-    next("/login");
+  const isLoggedIn = store.getters.isLoggedIn;
+  if (to.meta.auth) {
+    if (isLoggedIn) next();
+    else next("/login");
+  } else if (to.meta.guest) {
+    if (!isLoggedIn) next();
+    else next("/dashboard");
+  } else {
+    next();
   }
-
-  if (to.matched.some((record) => record.meta.guest)) {
-    if (!store.getters.isLoggedIn) {
-      next();
-      return;
-    }
-    next("/dashboard");
-  }
-
-  next();
 });
 
 export default router;

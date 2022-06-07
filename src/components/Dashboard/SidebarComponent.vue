@@ -149,7 +149,7 @@ export default {
         .dispatch("logout")
         .then(() => {
           this.loading = false;
-          this.$router.push("/");
+          this.$router.push("/login");
         })
         .catch((error) => {
           this.loading = false;

@@ -127,6 +127,19 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-label="Close"
                       ></button>
                     </div>
+                    <div
+                      v-if="success"
+                      class="alert alert-success alert-dismissible fade show"
+                      role="alert"
+                    >
+                      Berhasil login
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                      ></button>
+                    </div>
                     <div v-if="loading" class="d-flex justify-content-center">
                       <LoadingComponent />
                     </div>
@@ -208,6 +221,7 @@ export default {
         password: "",
       },
       error: null,
+      success: null,
       loading: false,
     };
   },
@@ -218,7 +232,8 @@ export default {
         .dispatch("login", this.form)
         .then(() => {
           this.loading = false;
-          this.$router.push("/dashboard");
+          this.success = true;
+          this.$router.go("/dashboard");
         })
         .catch((error) => {
           this.loading = false;
