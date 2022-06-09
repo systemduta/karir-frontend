@@ -76,7 +76,11 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
-                <img :src="`${backendUrl}/images/${form.image}`" alt="" />
+                <img
+                  :src="`${backendUrl}images/${form.image}`"
+                  alt=""
+                  style="width: 20rem"
+                />
                 <div class="mb-3">
                   <label class="form-label">Thumbnail</label>
                   <input
