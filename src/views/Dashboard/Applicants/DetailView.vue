@@ -133,74 +133,112 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     <p class="fs-4">Applicant FIle</p>
                     <div class="mb-3">
                       <p class="form-label">CV</p>
-                      <a
-                        class="p-1 px-3 text-decoration-none text-black rounded-pill input-border"
+                      <button
+                        :class="`btn ${
+                          loadingDownload && 'disabled'
+                        } p-1 px-3 text-decoration-none text-black rounded-pill input-border`"
                         style="background-color: #c4c4c4"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :href="`${baseUrl}cv/${
-                          applicant.file && applicant.file[0].cv
-                        }`"
+                        @click="
+                          downloadFile(
+                            'cv',
+                            applicant.id,
+                            applicant.file && applicant.file[0].cv
+                          )
+                        "
                       >
                         Download
-                      </a>
+                      </button>
                     </div>
                     <div class="mb-3">
                       <p class="form-label">Portofolio</p>
-                      <a
-                        class="p-1 px-3 text-decoration-none text-black rounded-pill input-border"
+                      <button
+                        :class="`btn ${
+                          loadingDownload && 'disabled'
+                        } p-1 px-3 text-decoration-none text-black rounded-pill input-border`"
                         style="background-color: #c4c4c4"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :href="`${baseUrl}fortofolio/${
-                          applicant.file && applicant.file[0].fortofolio
-                        }`"
+                        @click="
+                          downloadFile(
+                            'fortofolio',
+                            applicant.id,
+                            applicant.file && applicant.file[0].fortofolio
+                          )
+                        "
                       >
                         Download
-                      </a>
+                      </button>
                     </div>
                     <div class="mb-3">
                       <p class="form-label">Sertifikat</p>
-                      <a
-                        class="p-1 px-3 text-decoration-none text-black rounded-pill input-border"
+                      <button
+                        :class="`btn ${
+                          loadingDownload && 'disabled'
+                        } p-1 px-3 text-decoration-none text-black rounded-pill input-border`"
                         style="background-color: #c4c4c4"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :href="`${baseUrl}certificate/${
-                          applicant.file && applicant.file[0].certificate
-                        }`"
+                        @click="
+                          downloadFile(
+                            'certivicate',
+                            applicant.id,
+                            applicant.file && applicant.file[0].certificate
+                          )
+                        "
                       >
                         Download
-                      </a>
+                      </button>
                     </div>
                     <div class="mb-3">
                       <p class="form-label">Foto</p>
-                      <a
-                        class="p-1 px-3 text-decoration-none text-black rounded-pill input-border"
+                      <button
+                        :class="`btn ${
+                          loadingDownload && 'disabled'
+                        } p-1 px-3 text-decoration-none text-black rounded-pill input-border`"
                         style="background-color: #c4c4c4"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        :href="`${baseUrl}foto/${
-                          applicant.file && applicant.file[0].foto
-                        }`"
+                        @click="
+                          downloadFile(
+                            'foto',
+                            applicant.id,
+                            applicant.file && applicant.file[0].foto
+                          )
+                        "
                       >
                         Download
-                      </a>
+                      </button>
                     </div>
                   </div>
                   <div class="p-3">
-                    <form>
+                    <div
+                      v-if="loadingPostStatus"
+                      class="d-flex justify-content-center"
+                    >
+                      <LoadingComponent />
+                    </div>
+                    <div
+                      v-if="errorPostStatus"
+                      class="alert alert-danger alert-dismissible fade show"
+                      role="alert"
+                    >
+                      {{ errorPostStatus }}
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="Close"
+                        @click="errorPostStatus = false"
+                      ></button>
+                    </div>
+                    <form v-if="!loadingPostStatus">
                       <div class="mb-3">
                         <label class="form-label">Status</label>
                         <select
                           name="status"
                           v-model="status"
                           class="form-select rounded-pill py-2 bg-grey input-border"
-                          @onCahnge="postStatusChanged"
+                          @change="postStatusChanged"
+                          :disabled="loadingPostStatus"
                         >
-                          <option value="process">Process</option>
-                          <option value="decline">Decline</option>
-                          <option value="approve">Approve</option>
+                          <option value="Dibuka" disabled>Dibuka</option>
+                          <option value="Dihubungi">Dihubungi</option>
+                          <option value="Diterima">Diterima</option>
+                          <option value="Ditolak">Ditolak</option>
                         </select>
                       </div>
                     </form>
@@ -222,13 +260,14 @@ import axios from "../../../plugins/axios";
 export default {
   data() {
     return {
-      baseUrl: process.env.VUE_APP_BACKEND_BASE_URL,
-      applicant: ref([]),
+      baseUrl: process.env.VUE_APP_API_BASE_URL,
+      applicant: ref({}),
       status: ref(""),
       loading: ref(false),
       error: ref(false),
       loadingPostStatus: ref(false),
       errorPostStatus: ref(false),
+      loadingDownload: ref(false),
     };
   },
   created() {
@@ -250,24 +289,61 @@ export default {
         );
         console.log(data.data);
         this.applicant = data.data;
+        this.status = data.data.status;
         this.error = false;
         this.loading = false;
+
+        if (this.applicant.status == "Masuk" || !this.applicant.status) {
+          axios
+            .post(`update-status/${this.$route.params.id}`, {
+              status: "Dibuka",
+            })
+            .then(() => (this.status = "Dibuka"))
+            .catch((error) =>
+              alert(`Gagal mengubah status ke "Dibuka": ${error}`)
+            );
+        }
       } catch (error) {
         this.loading = false;
         this.error = error;
       }
     },
+    downloadFile(file, id, fileName) {
+      if (!fileName) {
+        return alert("File tidak tersedia");
+      }
+      this.loadingDownload = true;
+      axios
+        .get(`${file}/${id}`, {
+          responseType: "blob",
+        })
+        .then((response) => {
+          const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement("a");
+
+          link.href = fileURL;
+          link.setAttribute("download", fileName);
+          document.body.appendChild(link);
+
+          link.click();
+          this.loadingDownload = false;
+        })
+        .catch((error) => {
+          alert(error);
+          this.loadingDownload = false;
+        });
+    },
     async postStatusChanged() {
-      console.log(`changed to ${this.status}`);
-      // try {
-      //   this.loadingPostStatus = true;
-      //   await axios.post(`participant/${this.$route.params.id}/${this.status}`);
-      //   this.errorPostStatus = false;
-      //   this.loadingPostStatus = false;
-      // } catch (error) {
-      //   this.loadingPostStatus = false;
-      //   this.errorPostStatus = error;
-      // }
+      try {
+        this.loadingPostStatus = true;
+        await axios.post(`update-status/${this.$route.params.id}`, {
+          status: this.status,
+        });
+        this.loadingPostStatus = false;
+      } catch (error) {
+        this.loadingPostStatus = false;
+        this.errorPostStatus = error;
+      }
     },
   },
   mounted() {},
