@@ -80,7 +80,7 @@ export default {
   },
   created() {
     this.$watch(
-      () => this.$router.params,
+      () => this.$route.params,
       () => {
         $("#dataTable").DataTable().destroy();
         this.fetchApplicantsData();
