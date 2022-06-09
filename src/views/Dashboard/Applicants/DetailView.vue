@@ -223,6 +223,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         >
                           <option value="Dibuka" disabled>Dibuka</option>
                           <option value="Dihubungi">Dihubungi</option>
+                          <option value="Interview">Interview</option>
                           <option value="Diterima">Diterima</option>
                           <option value="Ditolak">Ditolak</option>
                         </select>

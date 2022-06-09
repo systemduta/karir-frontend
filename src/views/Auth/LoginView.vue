@@ -216,10 +216,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
 export default {
   data() {
     return {
-      form: {
-        email: "admin.careers@maesagroup.com",
-        password: "password",
-      },
+      form: {},
       error: null,
       success: null,
       loading: false,
