@@ -112,6 +112,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <img
             src="@/assets/images/ilustrations/apply-success.svg"
             class="img-fluid"
+            style="height: 50rem"
           />
           <RouterLink
             to="/"
@@ -291,25 +292,28 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                       type="file"
                       @change="handleFileChange($event)"
                       name="cv"
+                      accept="application/pdf"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Portofolio</label>
                     <input
+                      required
                       type="file"
                       @change="handleFileChange($event)"
                       name="fortofolio"
+                      accept="application/pdf"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
                   <div class="mb-3">
                     <label class="form-label">Sertifikat</label>
                     <input
-                      required
                       type="file"
                       @change="handleFileChange($event)"
                       name="certificate"
+                      accept="application/pdf"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
@@ -320,6 +324,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                       type="file"
                       @change="handleFileChange($event)"
                       name="foto"
+                      accept="image/*"
                       class="form-control rounded-pill py-2 bg-grey input-border"
                     />
                   </div>
@@ -337,6 +342,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     class="btn-close"
                     data-bs-dismiss="alert"
                     aria-label="Close"
+                    @click="errorApply = false"
                   ></button>
                 </div>
                 <div v-if="loadingApply" class="d-flex justify-content-between">
@@ -346,7 +352,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   v-if="!loadingApply"
                   :class="`${
                     loadingApply && 'disabled'
-                  } btn text-white bg-dark rounded-pill py-2 px-5`"
+                  } text-white bg-dark rounded-pill py-2 px-5`"
                   type="submit"
                 >
                   Daftar
@@ -389,6 +395,7 @@ export default {
         fortofolio: null,
         certificate: null,
         foto: null,
+        status: "Masuk",
       }),
       loadingApply: ref(false),
       errorApply: ref(false),

@@ -217,8 +217,8 @@ export default {
   data() {
     return {
       form: {
-        email: "",
-        password: "",
+        email: "admin.careers@maesagroup.com",
+        password: "password",
       },
       error: null,
       success: null,

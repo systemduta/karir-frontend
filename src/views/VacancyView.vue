@@ -222,7 +222,7 @@ export default {
   },
   computed: {
     limitedLatestVacancies() {
-      return this.latestVacancies.slice(0, 3);
+      return this.latestVacancies.slice(0, 4);
     },
   },
   methods: {

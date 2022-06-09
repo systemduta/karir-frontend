@@ -139,11 +139,15 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <p class="fs-4">Upss, something went wrong</p>
         </div>
         <div class="row g-3 justify-content-center">
-          <div v-if="vacanciesShowed.length == 0">
+          <div
+            class="d-flex justify-content-center"
+            v-if="vacanciesShowed.length == 0"
+          >
             <img
               src="@/assets/images/ilustrations/no-data.svg"
               class="img-fluid"
               alt="Not found"
+              style="height: 50rem"
             />
           </div>
           <VacancyCard
