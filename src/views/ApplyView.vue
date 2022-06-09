@@ -331,20 +331,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 </div>
               </div>
               <div class="float-end mt-5">
-                <div
-                  v-if="errorApply"
-                  class="alert alert-danger alert-dismissible fade show"
-                  role="alert"
-                >
-                  {{ errorApply }}
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert"
-                    aria-label="Close"
-                    @click="errorApply = false"
-                  ></button>
-                </div>
                 <div v-if="loadingApply" class="d-flex justify-content-between">
                   <LoadingComponent />
                 </div>
@@ -377,28 +363,8 @@ export default {
       vacancy: ref({}),
       loading: ref(true),
       error: ref(false),
-      form: ref({
-        name: "sample name",
-        email: "sample@sample.com",
-        gender: "Laki-laki",
-        phone: "1234567890",
-        date_birth: "1001-01-01",
-        place_birth: "Rumah Sakit",
-        age: 1000,
-        address: "sample address",
-        city: "sample city",
-        media_social: "sample account",
-        education: "Universitas",
-        major: "sample major",
-        univercity: "sample campuss",
-        cv: null,
-        fortofolio: null,
-        certificate: null,
-        foto: null,
-        status: "Masuk",
-      }),
+      form: ref({}),
       loadingApply: ref(false),
-      errorApply: ref(false),
       successApply: ref(false),
     };
   },
@@ -442,10 +408,21 @@ export default {
           },
         });
         this.loadingApply = false;
-        this.successApply = true;
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Lamaran berhasil dikirim",
+          showConfirmButton: false,
+          timer: 3000,
+        });
       } catch (error) {
         this.loadingApply = false;
-        this.errorApply = error;
+        this.$swal({
+          icon: "error",
+          title: "Lamaran gagal dikirim",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     handleFileChange(event) {

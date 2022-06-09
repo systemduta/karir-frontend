@@ -14,19 +14,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="d-flex justify-content-center mb-2">
             <LoadingComponent />
           </div>
-          <div
-            v-if="error"
-            class="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            {{ error }}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
           <table class="table table-hover mt-5" id="dataTable">
             <thead>
               <tr>
@@ -48,12 +35,12 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 </td>
                 <td>
                   <span
-                    v-if="applicant.status == Diterima"
+                    v-if="applicant.status == 'Diterima'"
                     class="badge bg-success"
                     >{{ applicant.status }}</span
                   >
                   <span
-                    v-else-if="applicant.status == Ditolak"
+                    v-else-if="applicant.status == 'Ditolak'"
                     class="badge bg-danger"
                     >{{ applicant.status }}</span
                   >
@@ -89,7 +76,6 @@ export default {
     return {
       applicants: ref([]),
       loading: ref(false),
-      error: ref(false),
     };
   },
   created() {
@@ -111,13 +97,16 @@ export default {
         const { data } = await axios.get(
           `participant/${this.$route.params.category}`
         );
-        console.log(data.data);
         this.applicants = data.data;
-        this.error = false;
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.error = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to fetch applicants data",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     setDataTable(interval) {

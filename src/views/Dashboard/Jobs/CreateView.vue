@@ -28,6 +28,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Posisi</label>
                   <input
+                    required
                     type="text"
                     name="name"
                     v-model="form.name"
@@ -37,6 +38,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Job Description</label>
                   <textarea
+                    required
                     name="jobdesc"
                     v-model="form.jobdesc"
                     class="form-control bg-grey input-border"
@@ -47,6 +49,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Kualifikasi</label>
                   <textarea
+                    required
                     name="qualification"
                     v-model="form.qualification"
                     class="form-control bg-grey input-border"
@@ -58,6 +61,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Tenggat Pendaftaran</label>
                   <input
+                    required
                     type="date"
                     v-model="form.date"
                     name="date"
@@ -67,6 +71,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div class="mb-3">
                   <label class="form-label">Penempatan</label>
                   <input
+                    required
                     type="text"
                     name="address"
                     v-model="form.address"
@@ -100,19 +105,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               </div>
             </div>
             <div class="float-end">
-              <div
-                v-if="error"
-                class="alert alert-danger alert-dismissible fade show"
-                role="alert"
-              >
-                {{ error }}
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"
-                ></button>
-              </div>
               <div v-if="loading" class="d-flex justify-content-between">
                 <LoadingComponent />
               </div>
@@ -138,17 +130,8 @@ export default {
   data() {
     return {
       form: ref({
-        name: "Position 1",
-        jobdesc:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius fuga vitae nam, aperiam necessitatibus quas fugiat sint mollitia alias debitis!",
-        qualification:
-          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius fuga vitae nam, aperiam necessitatibus quas fugiat sint mollitia alias debitis!",
-        date: "2002-02-02",
-        address: "Online",
         category_id: "1",
-        image: null,
       }),
-      error: ref(null),
       loading: ref(false),
     };
   },
@@ -165,11 +148,22 @@ export default {
           },
         });
         this.loading = false;
-        this.error = false;
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "New job has been saved",
+          showConfirmButton: false,
+          timer: 3000,
+        });
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loading = false;
-        this.error = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to create new job",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     handleFileChange(event) {

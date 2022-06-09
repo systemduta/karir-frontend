@@ -100,26 +100,13 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     v-model="form.category_id"
                     class="form-select rounded-pill py-2 bg-grey input-border"
                   >
-                    <option value="1">Fulltime</option>
+                    <option value="1" selected>Fulltime</option>
                     <option value="2">Internship</option>
                   </select>
                 </div>
               </div>
             </div>
             <div class="float-end">
-              <div
-                v-if="errorUpdate"
-                class="alert alert-danger alert-dismissible fade show"
-                role="alert"
-              >
-                {{ errorUpdate }}
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"
-                ></button>
-              </div>
               <div v-if="loadingUpdate" class="d-flex justify-content-between">
                 <LoadingComponent />
               </div>
@@ -145,10 +132,8 @@ export default {
   data() {
     return {
       backendUrl: process.env.VUE_APP_BACKEND_BASE_URL,
-      error: ref(null),
       loading: ref(false),
       form: ref({}),
-      errorUpdate: ref(null),
       loadingUpdate: ref(false),
     };
   },
@@ -173,7 +158,12 @@ export default {
         this.form = data.data;
       } catch (error) {
         this.loading = false;
-        this.error = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to fetch detail job",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     async updateJob() {
@@ -188,11 +178,22 @@ export default {
           },
         });
         this.loadingUpdate = false;
-        this.errorUpdate = false;
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Job has been successfully updated",
+          showConfirmButton: false,
+          timer: 3000,
+        });
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loadingUpdate = false;
-        this.errorUpdate = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to update job",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     handleFileChange(event) {

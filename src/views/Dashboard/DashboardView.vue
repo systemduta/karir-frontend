@@ -37,20 +37,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="my-4 d-flex justify-content-center">
             <LoadingComponent />
           </div>
-          <div
-            v-if="error"
-            class="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            {{ error }}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-              @click="error = false"
-            ></button>
-          </div>
           <div class="d-flex flex-wrap gap-5 justify-content-center">
             <div
               class="card p-3 text-white statistic-card statistic-card1"
@@ -97,7 +83,6 @@ export default {
     return {
       data: ref({}),
       loading: ref(false),
-      error: ref(false),
     };
   },
   methods: {
@@ -106,11 +91,15 @@ export default {
         this.loading = true;
         const { data } = await axios.get("dashboard");
         this.data = data;
-        this.error = false;
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.error = true;
+        this.$swal({
+          icon: "error",
+          title: "Failed to fetch data",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
   },

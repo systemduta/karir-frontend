@@ -211,20 +211,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     >
                       <LoadingComponent />
                     </div>
-                    <div
-                      v-if="errorPostStatus"
-                      class="alert alert-danger alert-dismissible fade show"
-                      role="alert"
-                    >
-                      {{ errorPostStatus }}
-                      <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="Close"
-                        @click="errorPostStatus = false"
-                      ></button>
-                    </div>
                     <form v-if="!loadingPostStatus">
                       <div class="mb-3">
                         <label class="form-label">Status</label>
@@ -264,9 +250,7 @@ export default {
       applicant: ref({}),
       status: ref(""),
       loading: ref(false),
-      error: ref(false),
       loadingPostStatus: ref(false),
-      errorPostStatus: ref(false),
       loadingDownload: ref(false),
     };
   },
@@ -287,10 +271,8 @@ export default {
         const { data } = await axios.get(
           `participant/${this.$route.params.id}`
         );
-        console.log(data.data);
         this.applicant = data.data;
         this.status = data.data.status;
-        this.error = false;
         this.loading = false;
 
         if (this.applicant.status == "Masuk" || !this.applicant.status) {
@@ -305,12 +287,21 @@ export default {
         }
       } catch (error) {
         this.loading = false;
-        this.error = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to fetch applicant data",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     downloadFile(file, id, fileName) {
       if (!fileName) {
-        return alert("File tidak tersedia");
+        return this.$swal({
+          icon: "error",
+          title: "File is unavailable",
+          showConfirmButton: true,
+        });
       }
       this.loadingDownload = true;
       axios
@@ -329,8 +320,13 @@ export default {
           this.loadingDownload = false;
         })
         .catch((error) => {
-          alert(error);
           this.loadingDownload = false;
+          this.$swal({
+            icon: "error",
+            title: "Failed to download file",
+            text: error,
+            showConfirmButton: true,
+          });
         });
     },
     async postStatusChanged() {
@@ -340,9 +336,21 @@ export default {
           status: this.status,
         });
         this.loadingPostStatus = false;
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Status has been successfully updated",
+          showConfirmButton: false,
+          timer: 15000,
+        });
       } catch (error) {
         this.loadingPostStatus = false;
-        this.errorPostStatus = error;
+        this.$swal({
+          icon: "error",
+          title: "Failed to change applicant status",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
   },

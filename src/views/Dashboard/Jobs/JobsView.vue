@@ -25,33 +25,6 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           >
             <LoadingComponent />
           </div>
-          <div
-            v-if="error"
-            class="alert alert-danger alert-dismissible fade show"
-            role="alert"
-          >
-            {{ error }}
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div
-            v-if="successDelete && !loading"
-            class="alert alert-success alert-dismissible fade show"
-            role="alert"
-          >
-            Data berhasil dihapus
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="alert"
-              aria-label="Close"
-              @click="this.successDelete = false"
-            ></button>
-          </div>
           <table class="table table-hover mt-5" id="dataTable">
             <thead>
               <tr>
@@ -121,7 +94,6 @@ export default {
       loading: ref(false),
       error: ref(false),
       loadingDelete: ref(false),
-      successDelete: ref(false),
     };
   },
   methods: {
@@ -129,13 +101,17 @@ export default {
       try {
         this.loading = true;
         const { data } = await axios.get("lowongan");
-        console.log(data.data);
         this.jobs = data.data;
-        this.error = false;
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.error = error;
+        this.$swal({
+          position: "top-end",
+          icon: "error",
+          title: "Failed to fetch jobs data from server",
+          text: error,
+          showConfirmButton: true,
+        });
       }
     },
     setDataTable(interval) {
@@ -148,14 +124,24 @@ export default {
         this.loadingDelete = true;
         await axios.delete(`lowongan-delete/${id}`);
         this.loadingDelete = false;
-        this.errorDelete = false;
-        this.successDelete = true;
+        this.$swal({
+          position: "top-end",
+          icon: "success",
+          title: "Job has been successfully updated",
+          showConfirmButton: false,
+          timer: 3000,
+        });
         this.fetchJobsData();
         $("#dataTable").DataTable().destroy();
         this.setDataTable(3000);
       } catch (error) {
+        this.$swal({
+          icon: "error",
+          title: "Failed to delete job",
+          text: error,
+          showConfirmButton: true,
+        });
         this.loadingDelete = false;
-        this.error = error;
       }
     },
   },
