@@ -144,17 +144,28 @@ export default {
   },
   methods: {
     userLogout() {
-      confirm("Apakah anda yakin ingin keluar?");
-      this.$store
-        .dispatch("logout")
-        .then(() => {
-          this.loading = false;
-          this.$router.push("/login");
-        })
-        .catch((error) => {
-          this.loading = false;
-          this.errors = error.response.data.errors;
-        });
+      this.$swal({
+        title: "Confirmation",
+        text: "Are you sure to logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Logout",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store
+            .dispatch("logout")
+            .then(() => {
+              this.loading = false;
+              this.$router.push("/login");
+            })
+            .catch((error) => {
+              this.loading = false;
+              this.errors = error.response.data.errors;
+            });
+        }
+      });
     },
   },
 };
