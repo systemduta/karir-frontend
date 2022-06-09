@@ -58,11 +58,11 @@
         <div class="accordion-item border-0">
           <h2 class="accordion-header border-0" id="headingOne">
             <button
-              class="accordion-button"
+              class="accordion-button collapsed"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#collapseOne"
-              aria-expanded="true"
+              aria-expanded="false"
               aria-controls="collapseOne"
             >
               <i class="bi bi-people"></i>&emsp;
@@ -71,7 +71,7 @@
           </h2>
           <div
             id="collapseOne"
-            class="accordion-collapse collapse border-0 show"
+            class="accordion-collapse collapse border-0"
             aria-labelledby="headingOne"
             data-bs-parent="#accordionExample"
           >
@@ -144,7 +144,7 @@ export default {
   },
   methods: {
     userLogout() {
-      this.loading = true;
+      confirm("Apakah anda yakin ingin keluar?");
       this.$store
         .dispatch("logout")
         .then(() => {
