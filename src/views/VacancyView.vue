@@ -212,8 +212,8 @@ export default {
   created() {
     this.$watch(
       () => this.$route.params,
-      () => {
-        this.fetchDetailVacancy();
+      (to) => {
+        this.fetchDetailVacancy(to.id);
         this.fetchLatestVacancy();
       },
 
@@ -226,11 +226,9 @@ export default {
     },
   },
   methods: {
-    async fetchDetailVacancy() {
+    async fetchDetailVacancy(id) {
       try {
-        const { data } = await axios.get(
-          `careers-detail/${this.$route.params.id}`
-        );
+        const { data } = await axios.get(`careers-detail/${id}`);
         this.error = false;
         this.loading = false;
         this.vacancy = data.data;

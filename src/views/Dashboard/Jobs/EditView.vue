@@ -110,6 +110,25 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <div v-if="loadingUpdate" class="d-flex justify-content-between">
                 <LoadingComponent />
               </div>
+              <div
+                v-if="errorUpdate"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                <div v-for="(error, index) in errorUpdate" :key="index">
+                  <li v-for="(value, _) in error" :key="_">
+                    {{ value }}
+                  </li>
+                </div>
+
+                <button
+                  type="button"
+                  @click="errorUpdate = false"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
               <button
                 v-if="!loadingUpdate"
                 class="text-white bg-dark rounded-pill py-2 px-5"
@@ -135,6 +154,7 @@ export default {
       loading: ref(false),
       form: ref({}),
       loadingUpdate: ref(false),
+      errorUpdate: ref(false),
     };
   },
   created() {
@@ -158,6 +178,7 @@ export default {
         this.form = data.data;
       } catch (error) {
         this.loading = false;
+        this.errorUpdate = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Failed to fetch detail job",

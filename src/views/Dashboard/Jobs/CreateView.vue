@@ -108,6 +108,25 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               <div v-if="loading" class="d-flex justify-content-between">
                 <LoadingComponent />
               </div>
+              <div
+                v-if="errorPost"
+                class="alert alert-danger alert-dismissible fade show"
+                role="alert"
+              >
+                <div v-for="(error, index) in errorPost" :key="index">
+                  <li v-for="(value, _) in error" :key="_">
+                    {{ value }}
+                  </li>
+                </div>
+
+                <button
+                  type="button"
+                  @click="errorPost = false"
+                  class="btn-close"
+                  data-bs-dismiss="alert"
+                  aria-label="Close"
+                ></button>
+              </div>
               <button
                 v-if="!loading"
                 class="text-white bg-dark rounded-pill py-2 px-5"
@@ -133,6 +152,7 @@ export default {
         category_id: "1",
       }),
       loading: ref(false),
+      errorPost: ref(false),
     };
   },
   methods: {
@@ -158,6 +178,7 @@ export default {
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loading = false;
+        this.errorPost = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Failed to create new job",

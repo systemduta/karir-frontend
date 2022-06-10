@@ -209,12 +209,14 @@ export default {
         entries.forEach((entry) => {
           const width = entry.contentRect.width;
           const filter = document.getElementById("filter");
-          if (width < 772) {
-            filter.classList.remove("rounded-pill");
-            filter.classList.add("rounded-3");
-          } else {
-            filter.classList.add("rounded-pill");
-            filter.classList.remove("rounded-3");
+          if (filter) {
+            if (width < 772) {
+              filter.classList.remove("rounded-pill");
+              filter.classList.add("rounded-3");
+            } else {
+              filter.classList.add("rounded-pill");
+              filter.classList.remove("rounded-3");
+            }
           }
         });
       });

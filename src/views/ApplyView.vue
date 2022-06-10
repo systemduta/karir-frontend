@@ -256,7 +256,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                       class="form-select rounded-pill py-2 bg-grey input-border"
                     >
                       <option value="-">-</option>
-                      <option value="SMA / SMK">SMA / SMK</option>
+                      <option value="SMA / SMK / MA">SMA / SMK / MA</option>
                       <option value="Politeknik">Politeknik</option>
                       <option value="Universitas">Universitas</option>
                     </select>
@@ -334,6 +334,25 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 <div v-if="loadingApply" class="d-flex justify-content-between">
                   <LoadingComponent />
                 </div>
+                <div
+                  v-if="errorApply"
+                  class="alert alert-danger alert-dismissible fade show"
+                  role="alert"
+                >
+                  <div v-for="(error, index) in errorApply" :key="index">
+                    <li v-for="(value, _) in error" :key="_">
+                      {{ value }}
+                    </li>
+                  </div>
+
+                  <button
+                    type="button"
+                    @click="errorApply = false"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"
+                  ></button>
+                </div>
                 <button
                   v-if="!loadingApply"
                   :class="`${
@@ -366,24 +385,23 @@ export default {
       form: ref({}),
       loadingApply: ref(false),
       successApply: ref(false),
+      errorApply: ref(false),
     };
   },
   created() {
     this.$watch(
       () => this.$route.params,
-      () => {
-        this.fetchDetailVacancy();
+      (to) => {
+        this.fetchDetailVacancy(to.id);
       },
 
       { immediate: true }
     );
   },
   methods: {
-    async fetchDetailVacancy() {
+    async fetchDetailVacancy(id) {
       try {
-        const { data } = await axios.get(
-          `careers-detail/${this.$route.params.id}`
-        );
+        const { data } = await axios.get(`careers-detail/${id}`);
         this.error = false;
         this.loading = false;
         this.vacancy = data.data;
@@ -417,6 +435,7 @@ export default {
         });
       } catch (error) {
         this.loadingApply = false;
+        this.errorApply = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Lamaran gagal dikirim",
