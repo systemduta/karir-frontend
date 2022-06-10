@@ -2,7 +2,8 @@
 .sidebar {
   width: 16rem !important;
   height: 100vh;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 .nav-link {
