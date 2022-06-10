@@ -197,6 +197,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     type="number"
                     name="age"
                     min="0"
+                    max="120"
                     v-model="form.age"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
@@ -212,12 +213,42 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   />
                 </div>
                 <div class="mb-3">
+                  <label class="form-label">Kecamatan</label>
+                  <input
+                    required
+                    type="text"
+                    name="district"
+                    v-model="form.district"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
                   <label class="form-label">Kota</label>
                   <input
                     required
                     type="text"
                     name="city"
                     v-model="form.city"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Provinsi</label>
+                  <input
+                    required
+                    type="text"
+                    name="province"
+                    v-model="form.province"
+                    class="form-control rounded-pill py-2 bg-grey input-border"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Kode Pos</label>
+                  <input
+                    required
+                    type="number"
+                    name="postal_code"
+                    v-model="form.postal_code"
                     class="form-control rounded-pill py-2 bg-grey input-border"
                   />
                 </div>
@@ -257,8 +288,10 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     >
                       <option value="-">-</option>
                       <option value="SMA / SMK / MA">SMA / SMK / MA</option>
-                      <option value="Politeknik">Politeknik</option>
-                      <option value="Universitas">Universitas</option>
+                      <option value="D3">D3</option>
+                      <option value="S1">S1</option>
+                      <option value="S2">S2</option>
+                      <option value="S3">S3</option>
                     </select>
                   </div>
                   <div class="mb-3">
