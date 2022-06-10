@@ -88,9 +88,27 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     </div>
                   </div>
                   <div class="mb-3">
+                    <p class="form-label">Kecamatan</p>
+                    <div class="p-2 rounded-pill bg-grey input-border">
+                      <p class="my-auto">{{ applicant.district }}</p>
+                    </div>
+                  </div>
+                  <div class="mb-3">
                     <p class="form-label">Kota</p>
                     <div class="p-2 rounded-pill bg-grey input-border">
                       <p class="my-auto">{{ applicant.city }}</p>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <p class="form-label">Provinsi</p>
+                    <div class="p-2 rounded-pill bg-grey input-border">
+                      <p class="my-auto">{{ applicant.province }}</p>
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <p class="form-label">Kode Pos</p>
+                    <div class="p-2 rounded-pill bg-grey input-border">
+                      <p class="my-auto">{{ applicant.postal_code }}</p>
                     </div>
                   </div>
                   <div class="mb-3">
