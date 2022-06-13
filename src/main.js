@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import VueSweetalert2 from "vue-sweetalert2";
 
+import "./registerServiceWorker";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import "bootstrap-icons/font/bootstrap-icons.css";

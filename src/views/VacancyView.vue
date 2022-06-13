@@ -91,12 +91,12 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <RouterLink
                 :to="`/apply/${$route.params.id}`"
-                class="bg-white border-0 text-primary rounded-pill px-5 py-2 text-decoration-none"
+                class="bg-white text-center border-0 text-primary rounded-pill px-5 py-2 text-decoration-none"
               >
                 Daftar
               </RouterLink>
               <button
-                class="bg-primary text-white rounded-pill px-5 py-2"
+                class="bg-primary text-center text-white rounded-pill px-5 py-2"
                 style="border: 0.5px solid white"
               >
                 Bagikan

@@ -308,17 +308,6 @@ export default {
         this.applicant = data.data;
         this.status = data.data.status;
         this.loading = false;
-
-        if (this.applicant.status == "Masuk" || !this.applicant.status) {
-          axios
-            .post(`update-status/${this.$route.params.id}`, {
-              status: "Dibuka",
-            })
-            .then(() => (this.status = "Dibuka"))
-            .catch((error) =>
-              alert(`Gagal mengubah status ke "Dibuka": ${error}`)
-            );
-        }
       } catch (error) {
         this.loading = false;
         this.error = error;
@@ -383,6 +372,15 @@ export default {
       }
     },
   },
-  mounted() {},
+  mounted() {
+    if (this.applicant.status == "Masuk" || !this.applicant.status) {
+      axios
+        .post(`update-status/${this.$route.params.id}`, {
+          status: "Dibuka",
+        })
+        .then(() => (this.status = "Dibuka"))
+        .catch((error) => alert(`Gagal mengubah status ke "Dibuka": ${error}`));
+    }
+  },
 };
 </script>
