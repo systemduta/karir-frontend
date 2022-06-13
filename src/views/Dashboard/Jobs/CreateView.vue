@@ -2,6 +2,8 @@
 import Header from "@/components/Dashboard/HeaderComponent.vue";
 import Sidebar from "@/components/Dashboard/SidebarComponent.vue";
 import LoadingComponent from "@/components/LoadingComponent.vue";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 </script>
 
 <style scoped>
@@ -37,25 +39,19 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Job Description</label>
-                  <textarea
-                    required
-                    name="jobdesc"
-                    v-model="form.jobdesc"
-                    class="form-control bg-grey input-border"
-                    style="border-radius: 20px"
-                    rows="7"
-                  ></textarea>
+                  <QuillEditor
+                    ref="jobdescForm"
+                    theme="snow"
+                    style="height: 10rem"
+                  />
                 </div>
                 <div class="mb-3">
                   <label class="form-label">Kualifikasi</label>
-                  <textarea
-                    required
-                    name="qualification"
-                    v-model="form.qualification"
-                    class="form-control bg-grey input-border"
-                    style="border-radius: 20px"
-                    rows="7"
-                  ></textarea>
+                  <QuillEditor
+                    ref="qualificationForm"
+                    theme="snow"
+                    style="height: 10rem"
+                  />
                 </div>
 
                 <div class="mb-3">
@@ -146,6 +142,7 @@ import { ref } from "vue";
 import axios from "../../../plugins/axios";
 
 export default {
+  components: { QuillEditor },
   data() {
     return {
       form: ref({
@@ -161,6 +158,12 @@ export default {
         this.loading = true;
         const formData = new FormData(document.getElementById("jobForm"));
         formData.append("image", this.form.image);
+        formData.append("jobdesc", this.$refs.jobdescForm.getHTML());
+        formData.append(
+          "qualification",
+          this.$refs.qualificationForm.getHTML()
+        );
+
         await axios.post(`lowongan-create`, formData, {
           headers: {
             accept: "application/json",

@@ -128,9 +128,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   <br />
                   <div class="placeholder col-12"></div>
                 </div>
-                <div>
-                  {{ vacancy.jobdesc }}
-                </div>
+                <div v-html="vacancy.jobdesc"></div>
               </div>
               <div class="card shadow border-radius-30px p-3">
                 <p class="text-primary fs-4">Kualifikasi</p>
@@ -141,9 +139,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                     <br />
                     <div class="placeholder col-12"></div>
                   </div>
-                  <div>
-                    {{ vacancy.qualification }}
-                  </div>
+                  <div v-html="vacancy.qualification"></div>
                 </div>
               </div>
             </div>
