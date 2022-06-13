@@ -181,7 +181,7 @@ export default {
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loading = false;
-        if (error.response.data[0]) this.errorPost = error.response.data[0];
+        this.errorPost = error.response.data;
         this.$swal({
           icon: "error",
           title: "Failed to create new job",
