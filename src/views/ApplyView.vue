@@ -469,7 +469,7 @@ export default {
         this.$router.push("/");
       } catch (error) {
         this.loadingApply = false;
-        this.errorApply = error.response.data[0];
+        if (error.response.data[0]) this.errorApply = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Lamaran gagal dikirim",

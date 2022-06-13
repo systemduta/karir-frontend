@@ -225,7 +225,7 @@ export default {
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loadingUpdate = false;
-        this.errorUpdate = error.response.data[0];
+        if (error.response.data[0]) this.errorUpdate = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Failed to update job",
