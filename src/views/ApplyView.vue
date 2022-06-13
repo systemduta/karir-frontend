@@ -82,7 +82,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <a
                 href="#form"
-                class="bg-white text-decoration-none border-0 text-primary rounded-pill px-5 py-2"
+                class="bg-white text-center text-decoration-none border-0 text-primary rounded-pill px-5 py-2"
               >
                 Daftar
               </a>
@@ -393,7 +393,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   } text-white bg-dark rounded-pill py-2 px-5`"
                   type="submit"
                 >
-                  Daftar
+                  Kirim
                 </button>
               </div>
             </div>
@@ -466,6 +466,7 @@ export default {
           showConfirmButton: false,
           timer: 3000,
         });
+        this.$router.push("/");
       } catch (error) {
         this.loadingApply = false;
         this.errorApply = error.response.data[0];
