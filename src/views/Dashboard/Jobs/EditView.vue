@@ -25,6 +25,20 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="my-4 d-flex justify-content-center">
             <LoadingComponent />
           </div>
+          <div
+            v-if="error"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            {{ error }}
+            <button
+              @click="error = false"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
           <form id="jobForm" @submit.prevent="updateJob" class="p-4">
             <div class="row">
               <div class="col-12 col-md-6">
@@ -152,6 +166,7 @@ export default {
     return {
       backendUrl: process.env.VUE_APP_BACKEND_BASE_URL,
       loading: ref(false),
+      error: ref(false),
       form: ref({}),
       loadingUpdate: ref(false),
       errorUpdate: ref(false),
@@ -178,13 +193,7 @@ export default {
         this.form = data.data;
       } catch (error) {
         this.loading = false;
-        this.errorUpdate = error.response.data[0];
-        this.$swal({
-          icon: "error",
-          title: "Failed to fetch detail job",
-          text: error,
-          showConfirmButton: true,
-        });
+        this.error = error;
       }
     },
     async updateJob() {
@@ -209,6 +218,7 @@ export default {
         this.$router.push("/dashboard/jobs");
       } catch (error) {
         this.loadingUpdate = false;
+        this.errorUpdate = error.response.data[0];
         this.$swal({
           icon: "error",
           title: "Failed to update job",

@@ -14,6 +14,20 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="d-flex justify-content-center mb-2">
             <LoadingComponent />
           </div>
+          <div
+            v-if="error"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            {{ error }}
+            <button
+              @click="error = false"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
           <table class="table table-hover mt-5" id="dataTable">
             <thead>
               <tr>
@@ -76,6 +90,7 @@ export default {
     return {
       applicants: ref([]),
       loading: ref(false),
+      error: ref(false),
     };
   },
   created() {
@@ -101,12 +116,7 @@ export default {
         this.loading = false;
       } catch (error) {
         this.loading = false;
-        this.$swal({
-          icon: "error",
-          title: "Failed to fetch applicants data",
-          text: error,
-          showConfirmButton: true,
-        });
+        this.error = error;
       }
     },
     setDataTable(interval) {

@@ -41,6 +41,20 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <div v-if="loading" class="my-4 d-flex justify-content-center">
             <LoadingComponent />
           </div>
+          <div
+            v-if="error"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            {{ error }}
+            <button
+              @click="error = false"
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
           <div class="p-4">
             <div class="row g-4">
               <div class="col-12 col-md-6">
@@ -269,6 +283,7 @@ export default {
       applicant: ref({}),
       status: ref(""),
       loading: ref(false),
+      error: ref(false),
       loadingPostStatus: ref(false),
       loadingDownload: ref(false),
     };
@@ -306,12 +321,7 @@ export default {
         }
       } catch (error) {
         this.loading = false;
-        this.$swal({
-          icon: "error",
-          title: "Failed to fetch applicant data",
-          text: error,
-          showConfirmButton: true,
-        });
+        this.error = error;
       }
     },
     downloadFile(file, id, fileName) {
