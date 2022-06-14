@@ -126,6 +126,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
           <img
             src="@/assets/images/ilustrations/no-data.svg"
             class="img-fluid"
+            style="height: 50rem"
           />
         </div>
         <form
@@ -227,7 +228,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                       <option value="Katolik">Katolik</option>
                       <option value="Protestan">Protestan</option>
                       <option value="Hindu">Hindu</option>
-                      <option value="Budha">Buddha</option>
+                      <option value="Buddha">Buddha</option>
                       <option value="Konghucu">Konghucu</option>
                     </select>
                   </div>
@@ -475,334 +476,158 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                   </div>
                 </div>
                 <div class="card shadow rounded-30px p-3">
-                  <p class="text-primary fs-4">Riwayat Pendidikan</p>
+                  <p class="text-primary fs-4">Pendidikan</p>
                   <hr />
-                  <div class="mb-3">
-                    <ul class="nav nav-tabs mb-2" id="myTab" role="tablist">
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link active"
-                          id="sd-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#sd"
-                          type="button"
-                          role="tab"
-                          aria-controls="sd"
-                          aria-selected="true"
-                        >
-                          SD
-                        </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link"
-                          id="smp-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#smp"
-                          type="button"
-                          role="tab"
-                          aria-controls="smp"
-                          aria-selected="false"
-                        >
-                          SMP
-                        </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link"
-                          id="sma-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#sma"
-                          type="button"
-                          role="tab"
-                          aria-controls="sma"
-                          aria-selected="false"
-                        >
-                          SMA
-                        </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link"
-                          id="diploma-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#diploma"
-                          type="button"
-                          role="tab"
-                          aria-controls="diploma"
-                          aria-selected="false"
-                        >
-                          Diploma
-                        </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link"
-                          id="sarjana-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#sarjana"
-                          type="button"
-                          role="tab"
-                          aria-controls="sarjana"
-                          aria-selected="false"
-                        >
-                          Sarjana
-                        </button>
-                      </li>
-                      <li class="nav-item" role="presentation">
-                        <button
-                          class="nav-link"
-                          id="master-tab"
-                          data-bs-toggle="tab"
-                          data-bs-target="#master"
-                          type="button"
-                          role="tab"
-                          aria-controls="master"
-                          aria-selected="false"
-                        >
-                          Master
-                        </button>
-                      </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                      <div
-                        class="tab-pane fade show active"
-                        id="sd"
-                        role="tabpanel"
-                        aria-labelledby="sd-tab"
+                  <ul
+                    class="nav nav-tabs mb-2"
+                    id="educationsTab"
+                    role="tablist"
+                  >
+                    <li
+                      v-for="education in this.form.educations"
+                      :key="education.id"
+                      class="nav-item"
+                      role="presentation"
+                    >
+                      <button
+                        class="nav-link"
+                        :id="`${education.id}-tab`"
+                        data-bs-toggle="tab"
+                        :data-bs-target="`#education-${education.id}`"
+                        type="button"
+                        role="tab"
+                        :aria-controls="`${education.id}`"
+                        aria-selected="false"
                       >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="SD"
-                            v-model="form.education.sd.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sd.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sd.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sd.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                        {{ education.level }}
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link active"
+                        id="new-education-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#new-education"
+                        type="button"
+                        role="tab"
+                        aria-controls="new-education"
+                        aria-selected="true"
+                      >
+                        Baru
+                      </button>
+                    </li>
+                  </ul>
+                  <div class="tab-content" id="educationTabContent">
+                    <div
+                      v-for="(education, index) in form.educations"
+                      class="tab-pane fade"
+                      :id="`education-${education.id}`"
+                      :key="education.id"
+                      role="tabpanel"
+                      :aria-labelledby="`${education.id}-tab`"
+                    >
+                      <div class="mb-3">
+                        <p class="form-label">Jenjang</p>
+                        <div class="p-2 rounded-pill bg-grey input-border">
+                          <p class="my-auto">{{ education.level }}</p>
                         </div>
                       </div>
-                      <div
-                        class="tab-pane fade"
-                        id="smp"
-                        role="tabpanel"
-                        aria-labelledby="smp-tab"
-                      >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="SMP"
-                            v-model="form.education.smp.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.smp.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.smp.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.smp.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      <div class="mb-3">
+                        <p class="form-label">Nama Sekolah</p>
+                        <div class="p-2 rounded-pill bg-grey input-border">
+                          <p class="my-auto">{{ education.name }}</p>
                         </div>
                       </div>
-                      <div
-                        class="tab-pane fade"
-                        id="sma"
-                        role="tabpanel"
-                        aria-labelledby="sma-tab"
-                      >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="SMA"
-                            v-model="form.education.sma.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sma.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sma.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sma.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      <div class="mb-3">
+                        <p class="form-label">Periode</p>
+                        <div class="p-2 rounded-pill bg-grey input-border">
+                          <p class="my-auto">{{ education.period }}</p>
                         </div>
                       </div>
-                      <div
-                        class="tab-pane fade"
-                        id="diploma"
-                        role="tabpanel"
-                        aria-labelledby="diploma-tab"
-                      >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="Diploma"
-                            v-model="form.education.diploma.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.diploma.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.diploma.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.diploma.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      <div class="mb-3">
+                        <p class="form-label">Jurusan</p>
+                        <div class="p-2 rounded-pill bg-grey input-border">
+                          <p class="my-auto">{{ education.major }}</p>
                         </div>
                       </div>
-                      <div
-                        class="tab-pane fade"
-                        id="sarjana"
-                        role="tabpanel"
-                        aria-labelledby="sarjana-tab"
-                      >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="Sarjana"
-                            v-model="form.education.sarjana.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sarjana.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sarjana.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.sarjana.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      <div class="mb-3">
+                        <p class="form-label">Nilai / IPK</p>
+                        <div class="p-2 rounded-pill bg-grey input-border">
+                          <p class="my-auto">{{ education.score }}</p>
                         </div>
                       </div>
-                      <div
-                        class="tab-pane fade"
-                        id="master"
-                        role="tabpanel"
-                        aria-labelledby="master-tab"
-                      >
-                        <div class="mb-3">
-                          <label class="form-label">Nama Sekolah</label>
-                          <input
-                            type="text"
-                            placeholder="Master"
-                            v-model="form.education.master.name"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      <div class="float-end">
+                        <div
+                          class="btn bg-danger text-white rounded-pill d-flex align-items-center"
+                          @click="deleteEducation(index)"
+                        >
+                          <i class="bi bi-trash"></i> Hapus
                         </div>
-                        <div class="mb-3">
-                          <label class="form-label">Jurusan</label>
-                          <input
-                            type="text"
-                            v-model="form.education.master.major"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Periode</label>
-                          <input
-                            type="text"
-                            v-model="form.education.master.period"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
-                        </div>
-                        <div class="mb-3">
-                          <label class="form-label">Nilai / IPK</label>
-                          <input
-                            type="text"
-                            v-model="form.education.master.score"
-                            class="form-control rounded-pill py-2 bg-grey input-border"
-                          />
+                      </div>
+                    </div>
+                    <div
+                      class="tab-pane fade show active"
+                      id="new-education"
+                      role="tabpanel"
+                      aria-labelledby="new-education-tab"
+                    >
+                      <div class="mb-3">
+                        <label class="form-label">Jenjang Pendidikan</label>
+                        <select
+                          v-model="form.education_level"
+                          class="form-select rounded-pill py-2 bg-grey input-border"
+                        >
+                          <option value="Sekolah Dasar">Sekolah Dasar</option>
+                          <option value="Sekolah Menengah Pertama">
+                            Sekolah Menengah Pertama
+                          </option>
+                          <option value="Sekolah Menengah Atas">
+                            Sekolah Menengah Atas
+                          </option>
+                          <option value="Sarjana / Diploma">
+                            Sarjana / Diploma
+                          </option>
+                          <option value="Master">Master</option>
+                        </select>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nama Sekolah</label>
+                        <input
+                          type="text"
+                          v-model="form.education_name"
+                          class="form-control rounded-pill py-2 bg-grey input-border"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Periode</label>
+                        <input
+                          type="text"
+                          v-model="form.education_period"
+                          class="form-control rounded-pill py-2 bg-grey input-border"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Jurusan</label>
+                        <input
+                          type="text"
+                          v-model="form.education_major"
+                          class="form-control rounded-pill py-2 bg-grey input-border"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label">Nilai / IPK</label>
+                        <input
+                          type="text"
+                          v-model="form.education_score"
+                          class="form-control rounded-pill py-2 bg-grey input-border"
+                        />
+                      </div>
+                      <div class="float-end">
+                        <div
+                          class="btn bg-primary rounded-pill"
+                          @click="addEducation"
+                        >
+                          <i class="bi bi-plus"></i> Tambah
                         </div>
                       </div>
                     </div>
@@ -1481,44 +1306,7 @@ export default {
       loading: ref(true),
       error: ref(false),
       form: ref({
-        education: {
-          sd: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-          smp: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-          sma: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-          diploma: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-          sarjana: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-          master: {
-            name: "",
-            period: "",
-            major: "",
-            score: "",
-          },
-        },
+        educations: [],
         family: [],
         organizations: [],
         languages: [],
@@ -1593,6 +1381,38 @@ export default {
     },
     handleFileChange(event) {
       this.form = { ...this.form, [event.target.name]: event.target.files[0] };
+    },
+    addEducation() {
+      if (
+        !this.form.education_level ||
+        !this.form.education_name ||
+        !this.form.education_period ||
+        !this.form.education_major ||
+        !this.form.education_score
+      ) {
+        return this.$swal({
+          icon: "error",
+          title: "Semua isian pendidikan wajib diisi",
+          showConfirmButton: true,
+        });
+      }
+      this.form.educations.push({
+        id: this.makeStringId(128),
+        level: this.form.education_level,
+        name: this.form.education_name,
+        period: this.form.education_period,
+        major: this.form.education_major,
+        score: this.form.education_score,
+      });
+
+      this.form.education_level = "";
+      this.form.education_name = "";
+      this.form.education_period = "";
+      this.form.education_major = "";
+      this.form.education_score = "";
+    },
+    deleteEducation(index) {
+      return this.form.educations.splice(index, 1);
     },
     addFamily() {
       if (

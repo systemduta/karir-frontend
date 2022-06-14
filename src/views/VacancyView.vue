@@ -87,10 +87,14 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               </p>
             </div>
             <p class="fs-1 fw-bold lh-lg text-white">{{ vacancy.name }}</p>
-            <p class="fs-5 lh-lg text-white">{{ vacancy.type }}</p>
+            <p class="fs-5 lh-lg text-white">
+              {{ vacancy.category_id == 1 ? "Fulltime" : "Internship" }}
+            </p>
             <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <RouterLink
-                :to="`/apply/${$route.params.id}`"
+                :to="`/apply/${
+                  vacancy.category_id == 1 ? 'fulltime' : 'intern'
+                }/${$route.params.id}`"
                 class="bg-white text-center border-0 text-primary rounded-pill px-5 py-2 text-decoration-none"
               >
                 Daftar
