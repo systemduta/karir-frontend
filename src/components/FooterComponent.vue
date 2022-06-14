@@ -188,46 +188,32 @@ import "vue3-marquee/dist/style.css";
         </p>
         <div class="d-flex gap-3 fs-3">
           <a
-            href="#"
+            href="https://www.facebook.com/maesagroupholding"
             target="_blank"
             rel="noopener noreferrer"
             class="text-white"
             ><i class="bi bi-facebook"></i
           ></a>
           <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white"
-            ><i class="bi bi-whatsapp"></i
-          ></a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white"
-            ><i class="bi bi-instagram"></i
-          ></a>
-          <a
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-white"
-            ><i class="bi bi-linkedin"></i
-          ></a>
-          <a
-            href="#"
+            href="https://www.youtube.com/channel/UCl6uzTyI2BDkLqrMf4ljS3Q"
             target="_blank"
             rel="noopener noreferrer"
             class="text-white"
             ><i class="bi bi-youtube"></i
           ></a>
           <a
-            href="#"
+            href="https://www.instagram.com/maesagroup/"
             target="_blank"
             rel="noopener noreferrer"
             class="text-white"
-            ><i class="bi bi-tiktok"></i
+            ><i class="bi bi-instagram"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/company/maesagroup/mycompany/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white"
+            ><i class="bi bi-linkedin"></i
           ></a>
         </div>
       </div>
