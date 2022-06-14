@@ -278,7 +278,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             <div class="col-12 col-md-6">
               <div class="d-flex flex-column gap-3">
                 <div class="card shadow rounded-30px p-3">
-                  <p class="text-primary fs-4">Riwayat Pendidikan</p>
+                  <p class="text-primary fs-4">Pendidikan</p>
                   <hr />
                   <div class="mb-3">
                     <label class="form-label">Universitas</label>
