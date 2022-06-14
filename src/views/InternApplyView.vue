@@ -77,7 +77,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
               {{ vacancy.name }}
             </p>
             <p class="fs-5 lh-lg text-white">
-              {{ vacancy.type }}
+              {{ vacancy.category_id == 1 ? "Fulltime" : "Internship" }}
             </p>
             <div v-if="!error" class="d-flex gap-3 hero-buttons">
               <a
