@@ -1,17 +1,26 @@
+<script setup>
+import { Vue3Marquee } from "vue3-marquee";
+import "vue3-marquee/dist/style.css";
+</script>
+
+<style scoped>
+#companies_logo a img {
+  height: 50px;
+  width: auto;
+}
+</style>
+
 <template>
-  <div class="bg-primary py-3">
-    <div
-      class="d-flex gap-4 align-items-center justify-content-center"
-      style="overflow-x: auto; height: 150px"
-    >
+  <div class="bg-primary py-3" id="companies_logo" style="height: 120px">
+    <Vue3Marquee>
       <a
         href="https://maesagroup.co.id/bank-arthaya"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Bank-Arthaya.png"
-          height="50px"
           alt="Bank Arthaya"
         />
       </a>
@@ -19,6 +28,7 @@
         href="https://maesagroup.co.id/cun-motor-group"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-CUN.png"
@@ -30,6 +40,7 @@
         href="https://maesagroup.co.id/aum"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-AUM.png"
@@ -41,6 +52,7 @@
         href="https://maesagroup.co.id/prama-logistic"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Prama-Logistic.png"
@@ -52,6 +64,7 @@
         href="https://maesagroup.co.id/maesa-hotel"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Maesa-Hotel.png"
@@ -63,6 +76,7 @@
         href="https://maesagroup.co.id/pabrik-es-pmp-group"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Pabrik-Es-PMP.png"
@@ -74,6 +88,7 @@
         href="https://maesagroup.co.id/mixtra-inti-tekindo"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-MIT.png"
@@ -85,6 +100,7 @@
         href="https://maesagroup.co.id/pandu-distributor"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Pandu-Distributor.png"
@@ -96,6 +112,7 @@
         href="https://maesagroup.co.id/hennessey-cuisine"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Hennessey.png"
@@ -107,6 +124,7 @@
         href="https://maesagroup.co.id/koperasi-sdm"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Koperasi-SDM.png"
@@ -118,6 +136,7 @@
         href="https://maesagroup.co.id/werkst"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Werkst.png"
@@ -129,6 +148,7 @@
         href="https://maesagroup.co.id/pabrik-es-tube"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Es-Kristal-PMP.png"
@@ -140,6 +160,7 @@
         href="https://maesagroup.co.id/dua-tangan-indonesia"
         target="_blank"
         rel="noopener noreferrer"
+        class="mx-3"
       >
         <img
           src="@/assets/images/companies/Logo-Dua-Tangan.png"
@@ -147,7 +168,7 @@
           alt="Dua Tangan"
         />
       </a>
-    </div>
+    </Vue3Marquee>
   </div>
   <footer class="text-white" style="background: #212121">
     <div
@@ -265,3 +286,11 @@
     </div>
   </footer>
 </template>
+
+<script>
+export default {
+  components: {
+    // Vue3Marquee,
+  },
+};
+</script>
