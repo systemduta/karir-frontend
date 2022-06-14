@@ -60,8 +60,11 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                       class="btn btn-warning text-white"
                       >Edit</RouterLink
                     >
-                    <!-- delete -->
-                    <form @submit.prevent="deleteJob(job.id)">
+                    <!-- delete form if there is no participant-->
+                    <form
+                      v-if="!job.participant.length"
+                      @submit.prevent="deleteJob(job.id)"
+                    >
                       <button
                         :disabled="loadingDelete"
                         class="btn btn-danger text-white"
@@ -106,7 +109,6 @@ export default {
       } catch (error) {
         this.loading = false;
         this.$swal({
-          position: "top-end",
           icon: "error",
           title: "Failed to fetch jobs data from server",
           text: error,
