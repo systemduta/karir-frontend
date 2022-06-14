@@ -91,38 +91,28 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             style="background-color: #e1e1e1; position: absolute; bottom: 0"
             id="filter"
           >
-            <form
-              @submit.prevent="filterVacancies"
-              class="row g-3 justify-content-center align-items-center"
-            >
-              <div class="col-12 col-md-5">
+            <form class="row g-3 justify-content-center align-items-center">
+              <div class="col-12 col-md-6">
                 <input
                   type="text"
                   name="search"
                   placeholder="Job title or keyword"
                   class="form-control rounded-pill"
                   v-model="form.name"
+                  @input="handleSearch"
                 />
               </div>
-              <div class="col-12 col-md-5">
+              <div class="col-12 col-md-6">
                 <select
                   name="type"
                   class="form-select rounded-pill"
                   v-model="form.category_id"
+                  @input="handleSearch"
                 >
                   <option value="">Filter</option>
                   <option value="1">Fulltime</option>
                   <option value="2">Intern</option>
                 </select>
-              </div>
-              <div class="col-12 col-md-2">
-                <button
-                  type="submit"
-                  class="rounded-pill text-white w-100"
-                  style="background-color: #434343"
-                >
-                  Search
-                </button>
               </div>
             </form>
           </div>
@@ -154,7 +144,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
             v-else-if="vacanciesShowed.length"
             v-for="vacancy in vacanciesShowed"
             :key="vacancy.id"
-            :id="vacancy.id"
+            :id="parseInt(vacancy.id)"
             :name="vacancy.name"
             :image="vacancy.image"
             :category_id="vacancy.category_id"
@@ -192,6 +182,7 @@ export default {
         category_id: "",
       },
       loadingFilter: ref(false),
+      cancelSource: ref(null),
       errorFilter: ref(false),
     };
   },
@@ -234,20 +225,35 @@ export default {
         this.error = true;
       }
     },
-    async filterVacancies() {
-      try {
-        this.loadingFilter = true;
-        const { data } = await axios.get(
-          `search?name=${this.form.name}&category_id=${this.form.category_id}`
-        );
-        this.errorFilter = false;
-        this.loadingFilter = false;
-        this.vacancies = data.data;
-      } catch (error) {
-        this.vacancies = [];
-        this.loadingFilter = false;
-        this.errorFilter = error;
-      }
+    filterVacancies(name, category_id) {
+      this.loadingFilter = true;
+
+      if (this.cancelSource) this.cancelSource.cancel("cancel request");
+      this.cancelSource = axios.CancelToken.source();
+
+      axios
+        .get(`search?name=${name}&category_id=${category_id}`, {
+          cancelToken: this.cancelSource.token,
+        })
+        .then((response) => {
+          this.errorFilter = false;
+          this.loadingFilter = false;
+          this.vacancies = response.data.data;
+          this.cancelSource = null;
+        })
+        .catch((error) => {
+          if (axios.isCancel(error)) return;
+
+          this.vacancies = [];
+          this.loadingFilter = false;
+          this.errorFilter = error;
+        });
+    },
+    handleSearch() {
+      setTimeout(
+        () => this.filterVacancies(this.form.name, this.form.category_id),
+        1800
+      );
     },
   },
   mounted() {
