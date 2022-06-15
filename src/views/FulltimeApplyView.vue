@@ -1343,7 +1343,7 @@ export default {
     async postApply() {
       const formData = new FormData(document.getElementById("applyForm"));
       formData.append("family", this.form.family);
-      formData.append("education", this.form.education);
+      formData.append("education", this.form.educations);
       formData.append("organizations", this.form.organizations);
       formData.append("languages", this.form.languages);
       formData.append("experiences", this.form.experiences);
