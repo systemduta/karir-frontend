@@ -100,6 +100,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 Daftar
               </RouterLink>
               <button
+                @click="copyUrl"
                 class="bg-primary text-center text-white rounded-pill px-5 py-2"
                 style="border: 0.5px solid white"
               >
@@ -246,6 +247,42 @@ export default {
         this.loadingVacancies = false;
         this.errorVacancies = true;
       }
+    },
+    copyToClipboard(str) {
+      return new Promise((resolve, reject) => {
+        var success = false;
+        function listener(e) {
+          e.clipboardData.setData("text/plain", str);
+          e.preventDefault();
+          success = true;
+        }
+        document.addEventListener("copy", listener);
+        document.execCommand("copy");
+        document.removeEventListener("copy", listener);
+        success ? resolve() : reject();
+      });
+    },
+
+    copyUrl() {
+      const link = window.location.href;
+
+      this.copyToClipboard(link)
+        .then(() => {
+          this.$swal({
+            position: "top-end",
+            icon: "success",
+            title: "Link berhasil disalin",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          this.$swal({
+            icon: "error",
+            title: "Gagal menyalin tautan",
+            text: error,
+          });
+        });
     },
   },
 };

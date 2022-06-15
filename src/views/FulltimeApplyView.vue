@@ -87,6 +87,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                 Daftar
               </a>
               <button
+                @click="copyUrl"
                 class="bg-primary text-white rounded-pill px-5 py-2"
                 style="border: 0.5px solid white"
               >
@@ -348,7 +349,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-controls="new-family"
                         aria-selected="true"
                       >
-                        Baru
+                        Tambah
                       </button>
                     </li>
                   </ul>
@@ -513,7 +514,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-controls="new-education"
                         aria-selected="true"
                       >
-                        Baru
+                        Tambah
                       </button>
                     </li>
                   </ul>
@@ -671,7 +672,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-controls="new-organization"
                         aria-selected="true"
                       >
-                        Baru
+                        Tambah
                       </button>
                     </li>
                   </ul>
@@ -795,7 +796,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-controls="new-language"
                         aria-selected="true"
                       >
-                        Baru
+                        Tambah
                       </button>
                     </li>
                   </ul>
@@ -942,7 +943,7 @@ import LoadingComponent from "@/components/LoadingComponent.vue";
                         aria-controls="new-experience"
                         aria-selected="true"
                       >
-                        Baru
+                        Tambah
                       </button>
                     </li>
                   </ul>
@@ -1549,6 +1550,42 @@ export default {
         );
       }
       return result;
+    },
+    copyToClipboard(str) {
+      return new Promise((resolve, reject) => {
+        var success = false;
+        function listener(e) {
+          e.clipboardData.setData("text/plain", str);
+          e.preventDefault();
+          success = true;
+        }
+        document.addEventListener("copy", listener);
+        document.execCommand("copy");
+        document.removeEventListener("copy", listener);
+        success ? resolve() : reject();
+      });
+    },
+
+    copyUrl() {
+      const link = window.location.href;
+
+      this.copyToClipboard(link)
+        .then(() => {
+          this.$swal({
+            position: "top-end",
+            icon: "success",
+            title: "Link berhasil disalin",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        })
+        .catch((error) => {
+          this.$swal({
+            icon: "error",
+            title: "Gagal menyalin tautan",
+            text: error,
+          });
+        });
     },
   },
 };
